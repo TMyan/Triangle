@@ -23,8 +23,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
+        Route::pattern('lang', 'en|am|ru');
+        Route::pattern('manufacturer', 'apple|samsung|lenovo|huawei_honor|microsoft');
+        Route::pattern('category', 'phones|computers|tablets|smart_watches|accessories');
         parent::boot();
     }
 

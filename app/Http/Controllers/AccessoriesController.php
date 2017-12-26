@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ManufacturerController extends Controller
+class AccessoriesController extends ProductController
 {
     public function index($lang, $manufacturer) {
 
