@@ -16,6 +16,19 @@
             myHeader,
             myFooter,
             myContent
+        },
+        methods: {
+            currentLanguage () {
+                let pathname = window.location.pathname;
+                let language = pathname.split('/')[1];
+                return language;
+            }
+        },
+        created () {
+            let lang = this.currentLanguage();
+            if (this.$store.state.language !== lang) {
+                this.$store.commit('language', lang);
+            }
         }
     }
 </script>

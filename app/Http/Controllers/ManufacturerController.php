@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ManufacturerController extends Controller
+class ManufacturerController extends SiteController
 {
-    public function index($lang, $manufacturer) {
+    public function index($lang = 'en', $manufacturer) {
 
     }
 }

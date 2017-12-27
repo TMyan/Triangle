@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AboutController extends Controller
+class AboutController extends SiteController
 {
-    public function index($lang) {
+    public function index($lang = 'en') {
 
     }
 }

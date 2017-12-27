@@ -1,10 +1,16 @@
 <template>
-
+    <h1>My navbar</h1>
 </template>
 
 <script>
     export default {
-        name: "my-navbar"
+        name: "my-navbar",
+        props: {
+            nav: {
+                type: Array,
+                default: []
+            }
+        }
     }
 </script>
 

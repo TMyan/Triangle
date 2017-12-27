@@ -43213,7 +43213,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43281,6 +43281,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         myHeader: __WEBPACK_IMPORTED_MODULE_2__header_myHeader___default.a,
         myFooter: __WEBPACK_IMPORTED_MODULE_1__footer_myFooter___default.a,
         myContent: __WEBPACK_IMPORTED_MODULE_0__content_myContent___default.a
+    },
+    methods: {
+        currentLanguage: function currentLanguage() {
+            var pathname = window.location.pathname;
+            var language = pathname.split('/')[1];
+            return language;
+        }
+    },
+    created: function created() {
+        var lang = this.currentLanguage();
+        if (this.$store.state.language !== lang) {
+            this.$store.commit('language', lang);
+        }
     }
 });
 
@@ -43498,7 +43511,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43515,7 +43528,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "my-footer"
+    name: "my-footer",
+    data: function data() {
+        return {
+            footer: null
+        };
+    },
+
+    methods: {
+        footerStatus: function footerStatus() {
+            var status = void 0;
+            if (this.$store.state.staticData.footer) {
+                status = true;
+            } else {
+                status = false;
+            }
+            return status;
+        }
+    },
+    created: function created() {
+        var lang = this.$store.state.language;
+        var path = '/' + lang + '/footer';
+        if (!this.footerStatus()) {
+            axios.get(path).then(function (response) {
+                console.log(response.data);
+                /*
+                  this.footer = response.footer;
+                  this.$store.commit('footer', true);
+                */
+            }).catch(function (response) {
+                return console.log(response);
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -43625,7 +43670,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43644,15 +43689,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "my-header",
+    data: function data() {
+        return {
+            header: null
+        };
+    },
+
     components: {
         myNavbar: __WEBPACK_IMPORTED_MODULE_0__navbar_myNavbar___default.a
+    },
+    methods: {
+        headerStatus: function headerStatus() {
+            var status = void 0;
+            if (this.$store.state.staticData.header) {
+                status = true;
+            } else {
+                status = false;
+            }
+            return status;
+        }
+    },
+    created: function created() {
+        var lang = this.$store.state.language;
+        var path = '/' + lang + '/navigation';
+        if (!this.headerStatus()) {
+            axios.get(path).then(function (response) {
+                console.log(response.data);
+                /*
+                 this.header = response.header;
+                 this.$store.commit('header', true);
+                */
+            }).catch(function (response) {
+                return console.log(response);
+            });
+        }
     }
-
 });
 
 /***/ }),
@@ -43770,7 +43845,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("h1", [_vm._v("My navbar")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -46630,11 +46705,21 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     state: {
-        count: 0
+        staticData: {
+            header: false,
+            footer: false
+        },
+        language: 'en'
     },
     mutations: {
-        increment: function increment(state) {
-            state.count++;
+        language: function language(state, lang) {
+            state.language = lang;
+        },
+        header: function header(state, status) {
+            state.staticData.header = status;
+        },
+        footer: function footer(state, status) {
+            state.staticData.footer = status;
         }
     }
 }));

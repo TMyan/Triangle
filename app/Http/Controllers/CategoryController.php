@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoryController extends SiteController
 {
-    public function index($lang, $category) {
+    public function index($lang = 'en', $category) {
 
     }
 }

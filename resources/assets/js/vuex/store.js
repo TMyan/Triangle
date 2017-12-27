@@ -5,11 +5,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store ({
     state: {
-        count: 0
+        staticData: {
+            header: false,
+            footer: false
+        },
+        language: 'en'
     },
     mutations: {
-        increment (state) {
-            state.count++
+        language (state, lang) {
+            state.language = lang;
+        },
+        header (state, status) {
+            state.staticData.header = status;
+        },
+        footer (state, status) {
+            state.staticData.footer = status;
         }
     }
 })
