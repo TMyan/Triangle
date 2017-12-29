@@ -43412,7 +43412,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Content")])
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43511,7 +43511,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43526,12 +43526,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "my-footer",
     data: function data() {
         return {
-            footer: null
+            footer: {}
         };
     },
 
@@ -43547,15 +43551,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
+        var _this = this;
+
         var lang = this.$store.state.language;
         var path = '/' + lang + '/footer';
         if (!this.footerStatus()) {
             axios.get(path).then(function (response) {
-                console.log(response.data);
-                /*
-                  this.footer = response.footer;
-                  this.$store.commit('footer', true);
-                */
+                _this.footer = response.data;
+                _this.$store.commit('footer', true);
             }).catch(function (response) {
                 return console.log(response);
             });
@@ -43571,7 +43574,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Footer")])
+  return _c("div", { staticClass: "footer", attrs: { id: "footer" } }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", [_vm._v(_vm._s(_vm.footer.text))])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43670,7 +43677,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43689,44 +43696,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "my-header",
-    data: function data() {
-        return {
-            header: null
-        };
-    },
-
     components: {
         myNavbar: __WEBPACK_IMPORTED_MODULE_0__navbar_myNavbar___default.a
-    },
-    methods: {
-        headerStatus: function headerStatus() {
-            var status = void 0;
-            if (this.$store.state.staticData.header) {
-                status = true;
-            } else {
-                status = false;
-            }
-            return status;
-        }
-    },
-    created: function created() {
-        var lang = this.$store.state.language;
-        var path = '/' + lang + '/navigation';
-        if (!this.headerStatus()) {
-            axios.get(path).then(function (response) {
-                console.log(response.data);
-                /*
-                 this.header = response.header;
-                 this.$store.commit('header', true);
-                */
-            }).catch(function (response) {
-                return console.log(response);
-            });
-        }
     }
 });
 
@@ -43817,7 +43807,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43832,9 +43822,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "my-navbar"
+    name: "my-navbar",
+    data: function data() {
+        return {
+            navigation: {}
+        };
+    },
+
+    methods: {
+        navigationStatus: function navigationStatus() {
+            var status = void 0;
+            if (this.$store.state.staticData.navigation) {
+                status = true;
+            } else {
+                status = false;
+            }
+            return status;
+        }
+    },
+    created: function created() {
+        var _this = this;
+
+        var lang = this.$store.state.language;
+        var path = '/' + lang + '/navigation';
+        if (!this.navigationStatus()) {
+            axios.get(path).then(function (response) {
+                _this.navigation = response.data;
+                _this.$store.commit('navigation', true);
+            }).catch(function (response) {
+                return console.log(response);
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -43845,9 +43887,94 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("My navbar")])
+  return _c("div", { staticClass: "vis" }, [
+    _c(
+      "ul",
+      { staticClass: "nav" },
+      [
+        _vm._l(_vm.navigation, function(nav) {
+          return _c(
+            "li",
+            {
+              staticClass: "nav-item",
+              class: { "submenu-product": nav.sub[0] }
+            },
+            [
+              _c("a", { staticClass: "nav-link", attrs: { href: nav.alias } }, [
+                _vm._v(_vm._s(nav.name))
+              ]),
+              _vm._v(" "),
+              nav.sub[0]
+                ? _c(
+                    "ul",
+                    { staticClass: "products-nav" },
+                    _vm._l(nav.sub, function(sub1, key) {
+                      return _c(
+                        "li",
+                        { staticClass: "nav-item submenu-company" },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "nav-link",
+                              attrs: { href: sub1.alias }
+                            },
+                            [_vm._v(_vm._s(sub1.name))]
+                          ),
+                          _vm._v(" "),
+                          sub1.sub[0]
+                            ? _c(
+                                "ul",
+                                {
+                                  staticClass: "products-nav-elem",
+                                  style: { top: key * 2.5 + "rem" }
+                                },
+                                _vm._l(sub1.sub, function(sub2) {
+                                  return _c("li", { staticClass: "nav-item" }, [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "nav-link",
+                                        attrs: { href: sub2.alias }
+                                      },
+                                      [_vm._v(_vm._s(sub2.name))]
+                                    )
+                                  ])
+                                })
+                              )
+                            : _vm._e()
+                        ]
+                      )
+                    })
+                  )
+                : _vm._e()
+            ]
+          )
+        }),
+        _vm._v(" "),
+        _vm._m(0)
+      ],
+      2
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-inline my-2 my-lg-0" }, [
+      _c("input", {
+        staticClass: "search",
+        attrs: { type: "search", placeholder: "Search" }
+      }),
+      _vm._v(" "),
+      _c("span", { staticClass: "search-btn" }, [
+        _c("i", { staticClass: "fa ion-android-search" })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -43865,9 +43992,53 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("my-navbar")], 1)
+  return _c("div", { staticClass: "header", attrs: { id: "header" } }, [
+    _c("div", { staticClass: "login big-l" }, [_vm._v("Login")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "logo col-3" }),
+        _vm._v(" "),
+        _c(
+          "nav",
+          { staticClass: "navbar col-9 justify-content-end" },
+          [
+            _c("div", { staticClass: "login small-l" }, [_vm._v("Login")]),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c("my-navbar"),
+            _vm._v(" "),
+            _vm._m(1)
+          ],
+          1
+        )
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "my-cart-btn" }, [
+      _c("i", { staticClass: "ion-android-cart" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "min-nav" }, [
+      _c("div"),
+      _vm._v(" "),
+      _c("div"),
+      _vm._v(" "),
+      _c("div")
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -43887,6 +44058,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "Triangle" },
     [
       _c("my-header"),
       _vm._v(" "),
@@ -46706,7 +46878,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     state: {
         staticData: {
-            header: false,
+            navigation: false,
             footer: false
         },
         language: 'en'
@@ -46715,8 +46887,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         language: function language(state, lang) {
             state.language = lang;
         },
-        header: function header(state, status) {
-            state.staticData.header = status;
+        navigation: function navigation(state, status) {
+            state.staticData.navigation = status;
         },
         footer: function footer(state, status) {
             state.staticData.footer = status;

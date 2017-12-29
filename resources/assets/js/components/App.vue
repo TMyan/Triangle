@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="Triangle">
         <my-header></my-header>
         <my-content></my-content>
         <my-footer></my-footer>

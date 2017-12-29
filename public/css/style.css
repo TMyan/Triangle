@@ -1,0 +1,592 @@
+
+ 
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+ body {
+      background-color: black!important;
+      margin-bottom: 7rem;
+    }
+
+
+.content {
+ 	padding-top: 10rem;
+ 	padding-bottom: 7rem;
+
+}
+
+.content .row {
+	margin: 0;
+}
+
+
+   /* Header*/ 
+
+  .header {
+  	position: fixed;
+  	z-index: 1;
+  	width: 100%;
+  	background-color: black;
+  }
+
+  .header a {
+  	color: #86888a
+  }
+  
+  .header a:hover {
+  	color: #ffffff;
+  	text-decoration: none;
+  }
+
+  .nav-link-t {
+    display: block;
+    margin: .5rem 1rem;
+    padding: .3rem 0;
+
+  }
+
+
+ .min-nav {
+ 	    display: none;
+	  	width: max-content;
+	    position: absolute;
+	    top: 1rem;
+	    right: 7rem;
+ }
+
+ .min-nav div {
+	 	height: 2px;
+	    background-color: #f8f9fa;
+	    margin-top: 5px;
+	    width: 1.8rem;
+ }
+
+
+ .products-nav {
+ 	display: none;
+ 	position: absolute;
+    list-style-type: none;
+    padding-left: 0px;
+    width: 11rem;
+    background-color: black;
+ }
+
+
+ .products-nav a:hover  {
+ 	background-color: white;
+ 	color: black;
+ }
+
+ .products-nav-elem {
+ 	display: none;
+ 	position: absolute;
+    list-style-type: none;
+    padding-left: 0;
+    left: 11rem;
+    width: 11rem;
+    background-color: black;
+ }
+
+
+.submenu-product:hover > ul{
+	display: block;
+}
+
+
+.submenu-company:hover  ul{
+	display: block;
+}
+
+
+ .service-nav {
+ 	display: none;
+ 	position: absolute;
+    list-style-type: none;
+    padding-left: 0px;
+    width: 13rem;
+    background-color: black;
+ }
+
+
+ .submenu-service:hover ul {
+ 	display: block;
+ }
+
+ .service-nav a:hover  {
+ 	background-color: white;
+ 	color: black;
+ }
+
+
+  .logo {
+
+    background-image: url("../images/logo/green.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 13rem;
+    height: 8rem;
+   } 
+
+  .active {
+  	    border-bottom: 1px solid white;
+  }
+
+   .my-cart-btn {
+   	position: absolute;
+   	top: 7.8rem;
+   	right: 2rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #30e04fa3;
+   }
+
+   .my-cart-btn:hover {
+   	color: #03ff30a3;
+   }
+
+   .search-btn {
+    width: 3rem;
+    font-size: 1.5rem;
+    color: #86888a;
+    text-align: center;
+  }
+
+  .search-btn:hover {
+ 	color: #ffffff;
+  }
+
+  .search {
+    border: none;
+    border-radius: .2rem;
+    text-align: center;
+    width: 7rem;
+    margin-left: 0rem;
+   }
+
+
+   .login {
+   	position: absolute;
+   	right: 2rem;
+   	top: .8rem;
+    color: white;
+    padding: .2rem .5rem;
+    border-radius: 1px;
+   }
+
+   .login:hover {
+   	background-color: white;
+   	color: black;
+   }
+
+   .small-l {
+   	display: none;
+   	right: 1rem;
+
+   }
+
+
+
+
+/* End Header */ 
+
+
+
+
+/* Home */
+     .home  {
+     	height: 28rem;
+     	background-color: white;
+     }
+    
+ /* End Home */
+
+
+
+/* About */
+
+
+
+  .abt {
+  	height: 28rem;
+  }
+
+  .abour-paragraph {
+  	max-height: 20rem;
+  	padding-top: 2rem;
+  	font-size: 1.1rem;
+    overflow: scroll; 
+    text-align: justify;
+  }
+
+  .about-header {
+  	padding-top: 2rem;
+  }
+
+  .big-triangle-icon {
+  	background-image: url("../images/logo/black.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center; 
+    width: 100%;
+    height: 100%;
+  }
+
+  
+
+
+/* End About */
+
+
+
+/* Contact */
+
+
+.contact-block {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+	padding-right: 2rem;
+	padding-left: 2rem;
+}
+
+.contact-elem {
+	padding-top: .5rem;
+	
+}
+
+.contact-elem i {
+	padding-left: 1rem;
+}
+
+.form-block {
+	padding-top: 3rem;
+	clear: both;
+}
+
+
+
+.wh i {
+  display: block;
+  padding-left: 0;
+} 
+
+.form-el input {
+	margin-right: 5rem;
+	padding-left: 1rem;
+	width: 60%;
+	float: right;
+	border: none;
+	border-radius: 2px;
+}
+
+
+.form-el textarea {
+	width: 100%;
+	min-height: 9rem;
+	max-height: 15rem;
+}
+
+.btn-c-s {
+	width: 4rem;
+	height: 2rem;
+    margin-top: 1rem;
+    background-color: white;
+    text-align: center;
+    line-height: 2rem;
+    border-radius: 2px;
+}
+
+.btn-c-s:hover {
+	background-color: gray;
+	color: white;
+}
+
+
+.maps {
+	width: 80%;
+	border-radius: 10px;
+	
+}
+
+.googleMap {
+	border: solid 1px;
+	border-radius: 10px;
+}
+
+
+/* End Contact */
+
+
+
+/* Product */
+
+.product {
+	color: #7b7b7b;
+}
+
+.filters {
+	padding-bottom: 5rem;
+}
+
+
+.f-par {
+	margin-top: 2.5rem;
+	height: 2rem;
+}
+
+.f-ic {
+	margin-left: 4rem;
+	position: relative;
+	width: 1rem;
+	left: 4rem;
+	top: -1.9rem;
+	font-size: 1.5rem;
+}
+
+.f-ic:hover {
+	color: #62a762;;
+}	
+
+.fcp {
+	display: inline-block;
+	width: .7rem;
+    height: .7rem;
+    margin-left: .5rem;
+    background-color: #585656;
+}
+
+.fnp {
+	display: inline-block;
+	padding-left: 1rem;
+}
+
+.fnp:hover {
+   color: #62a762;
+}
+
+.fpe {
+	margin-top: 1rem;
+}
+
+.product-elem {
+    background-color: white;
+    height: 29rem;
+    border: 3px solid;
+    border-color: #000000ed;
+    margin-bottom: 2rem;
+}
+
+.p-photo {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    max-width: 18rem;
+    margin: 0 auto;
+    background-image: url("../images/1.jpg");
+    height: 17rem;
+    background-color: gray;
+}
+
+.p-status {
+	width: 4rem;
+    height: 2rem;
+    background-color: #5bc388;
+    position: relative;
+    top: -17rem;
+    text-align: center;
+    line-height: 2rem;
+    color: black;
+}
+
+.p-block {
+	padding-bottom: 5rem;
+}
+
+.p-title {
+	height: 3rem;
+	overflow: hidden;
+}
+
+.p-price {
+	padding-top: 1rem;
+}
+
+.p-price span {
+	padding-left: 1rem;
+	color: #d2ffda;
+}
+
+.p-cart {
+	position: relative;
+    left: 70%;
+    bottom: 1.5rem;
+    color: #d28f28;
+    font-size: 1.1rem;
+    width: max-content;
+}
+
+.p-cart:hover {
+	color: gold;
+}
+
+.p-cart span {
+	padding-right: .4rem;
+}
+
+.p-more {
+	background-color: #cdd6d6;
+    padding: 7px 15px;
+    border-radius: 3px;
+}
+
+.p-more:hover {
+    background-color: #b5efa1;
+}
+
+.p-vote {
+	position: relative;
+    font-size: 1.5rem;
+    left: 47%;
+    bottom: 2rem;
+    width: max-content;
+}
+
+.p-vote span {
+	padding-right: .5rem;
+}
+
+.p-vote span:hover {
+	color: gold;
+}
+
+.p-vote sub {
+	font-size: .8rem;
+}
+
+
+/* Product option */ 
+
+.basic-block {
+   padding-left: 1rem;
+   color: #80c58ca3;
+   padding-top: 2rem;
+}
+
+.basic-block p {
+	margin-bottom: .5rem;
+}
+
+.basic-p {
+	border: 2px solid;
+    width: 90%;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    border-radius: 5px;
+    background-color: #969696;
+    color: #000000;
+}
+
+.add-cart-btn {
+	width: 6rem;
+    height: 2rem;
+    text-align: center;
+    background-color: #80c58ca3;
+    padding-top: 3px;
+    border-radius: 3px;
+    margin-top: 1rem;
+}
+
+
+.add-cart-btn:hover {
+	background-color: #50bb62a3;
+}
+
+.medium-block {
+	margin-top: 3rem;
+	margin-bottom: 3rem;
+}
+
+.medium-block-btn {
+	width: 4.4rem;
+    height: 2rem;
+    background-color: #84ca90a3;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 2rem;
+    color: black;
+}
+
+.med-option {
+	margin-top: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: #969696;
+    border-radius: 3px;
+    padding-bottom: 1rem; 
+}
+
+.med-gop {
+    border: 2px solid;
+    border-radius: 3px;
+    border-color: #b4b9bb;
+    margin-left: 1rem;
+}
+
+
+.gr {
+	padding-top: 1rem;
+	color: #d2ffd2;
+}
+
+.med-table {
+	width: 100%;
+	height: auto;
+}
+
+.mtw1 {
+	width: 25%;
+	background-color: #ceefed;
+	border-bottom: 1px solid;
+	text-align: center;
+	
+}
+
+.mtw2 {
+	width: 75%;
+	background-color: #a3bfca;;
+	border-bottom: 1px solid;
+	padding-left: .5rem;
+
+}
+
+/* End Product Option*/
+	
+
+/* Product */
+
+
+/* Footer */ 
+
+     .footer {
+       position: absolute;
+       width: 100%;
+       height: 7rem;
+       bottom:0;
+     }
+
+     .footer .container {
+     	height: 7rem;
+     	background-color: #969696;
+     	text-align: center;
+     }
+
+     .footer .container div {
+     	height: 7rem;
+     	line-height: 7rem;
+     	
+     }
+
+ /* End Footer */

@@ -1,0 +1,80 @@
+@media screen and (max-width: 990px) {
+  
+   .header  .nav {
+    display: block;
+   }
+
+   .nav .search {
+    margin-left: 1rem;
+   }
+
+   .navbar .min-nav {
+       display: block;
+   }
+
+   .vis {
+    display: none;
+   }
+
+   .logo {
+    margin-top: -1rem;
+   }
+
+   .submenu-product:hover ul {
+    display: none;
+   }
+   
+   .submenu-service:hover ul {
+    display: none;
+   }
+
+   .vis .nav > li {
+      width: 8rem;
+   }
+
+   .login.small-l {
+    display: block;
+   }
+
+   .login.big-l {
+    display: none;
+   }
+
+   .big-triangle-icon {
+    height: 50%;
+   }
+
+   .form-el input {
+      margin: 0;
+    }
+
+   .maps {
+    width: 100%; 
+  }
+
+  .p-vote {
+    left: 52%;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+     .logo {
+       margin-top: -1.5rem;
+     }
+
+     .abour-paragraph {
+       max-height: 15rem;
+     } 
+
+     .form-el input {
+      margin: 0;
+      width: 70%;
+    } 
+
+    .p-vote {
+      left: 57%;
+    }
+
+}
+

@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store ({
     state: {
         staticData: {
-            header: false,
+            navigation: false,
             footer: false
         },
         language: 'en'
@@ -15,8 +15,8 @@ export default new Vuex.Store ({
         language (state, lang) {
             state.language = lang;
         },
-        header (state, status) {
-            state.staticData.header = status;
+        navigation (state, status) {
+            state.staticData.navigation = status;
         },
         footer (state, status) {
             state.staticData.footer = status;

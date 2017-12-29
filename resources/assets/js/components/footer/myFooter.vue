@@ -1,5 +1,9 @@
 <template>
-    <h1>Footer</h1>
+    <div class="footer" id="footer">
+        <div class="container">
+            <div>{{footer.text}}</div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -7,7 +11,7 @@
         name: "my-footer",
         data () {
             return {
-                footer: null
+                footer: {}
             }
         },
         methods: {
