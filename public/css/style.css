@@ -198,8 +198,35 @@ html {
 /* Home */
      .home  {
      	height: 28rem;
-     	background-color: white;
+     	background-color: black;
      }
+
+
+
+     .home .slider {
+         width: 40%;
+         margin: auto;
+         text-align: center;
+         height: 100%;
+     }
+
+      .home .slider .img {
+          height: 75%;
+          width: 75%;
+          margin-left: 12.5%;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          background-image: url("../images/5.jpg");
+    }
+
+     .ti {
+        width: 75%;
+        margin-left: 12.5%;
+        height: 3rem;
+        padding-top: .5rem;
+        color: white;
+    }
     
  /* End Home */
 

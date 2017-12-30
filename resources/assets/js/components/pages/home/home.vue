@@ -1,10 +1,32 @@
 <template>
-    
+    <div class="home container" id="home">
+        <slider></slider>
+    </div>
 </template>
 
 <script>
+    import Slider from './slider'
     export default {
-        name: "home"
+        name: "home",
+        components: {
+          Slider
+        },
+        data () {
+            return {
+               homeData: []
+            }
+        },
+        methods: {
+
+        },
+        created () {
+            axios.get(window.location.pathname)
+                .then(response => {
+                    this.homeData = response.data;
+                })
+                .catch(response => console.log(response));
+
+        }
     }
 </script>
 

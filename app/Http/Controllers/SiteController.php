@@ -7,7 +7,6 @@ use DB;
 
 class SiteController extends Controller
 {
-
     public function dataPage(Request $request, $lang) {
         if ($request->ajax()) {
 

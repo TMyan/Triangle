@@ -15,7 +15,7 @@ class NavigationController extends Controller
 
          $level1 = [];
          foreach ($navData as $item1) {
-             $alias1 = $item1->alias;
+             $alias1 = '/' . $lang . $item1->alias;
              if ($item1->sub_level_one_id === 0 && $item1->sub_level_two_id === 0) {
                  $level2 = [];
                 foreach ($navData as $item2) {

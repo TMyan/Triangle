@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Start;
+use App\Start;
 
-class StartController extends SiteController
+class StartController extends Controller
 {
     public function index(Request $request, $lang = 'en') {
-        return $this->dataPage($request, $lang);
+        if ($request->ajax()) {
+           $title = 'title_' . $lang;
+           $text = 'text_' . $lang;
+           $homeData = Start::select($title, $text, 'image')->get();
+           return response()->json($homeData);
+        } else {
+            return view('triangle');
+        }
     }
 }
