@@ -46866,7 +46866,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -46897,8 +46897,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             homeData: []
         };
     },
-
-    methods: {},
     created: function created() {
         var _this = this;
 
@@ -46997,7 +46995,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.visible[data-v-549f751f] {\n    display: block;\n}\n", ""]);
 
 // exports
 
@@ -47019,9 +47017,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "slider"
+    name: "slider",
+    data: function data() {
+        return {
+            title: '',
+            text: '',
+            image: '',
+            length: '',
+            load: false,
+            lang: this.$store.state.language,
+            ite: 0
+        };
+    },
+
+    props: {
+        slide: {
+            type: Array,
+            default: []
+        }
+    },
+    watch: {
+        slide: function slide(value) {
+            var _this = this;
+
+            if (value.length) {
+                this.showSlider();
+                this.length = value.length;
+                this.slider();
+                setInterval(function () {
+                    _this.slider();
+                }, 7000);
+            }
+        }
+    },
+    methods: {
+        showSlider: function showSlider() {
+            this.load = true;
+        },
+        slider: function slider() {
+            var title = 'title_' + this.lang;
+            var text = 'text_' + this.lang;
+            this.title = this.slide[this.ite][title];
+            this.text = this.slide[this.ite][text];
+            this.image = "url(../images/" + this.slide[this.ite].image + ")";
+            if (this.ite < this.length - 1) {
+                this.ite++;
+            } else {
+                this.ite = 0;
+            }
+        }
+    }
 });
 
 /***/ }),
@@ -47032,26 +47082,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "slider", attrs: { id: "slider" } }, [
-      _c("div", { staticClass: "ti" }, [_vm._v("Stability and power․")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "img" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "ti" }, [
-        _vm._v(
-          "\n        Apple iphone X 256Gb\n        Unconditional favorite.\n    "
-        )
+  return _c("div", { staticClass: "slide", class: { visible: _vm.load } }, [
+    _c("div", { staticClass: "container style-flat" }, [
+      _c("div", { staticClass: "top" }, [
+        _c("div", { staticClass: "bottom" }, [
+          _c("div", { staticClass: "tex" }, [_vm._v(_vm._s(_vm.title))]),
+          _vm._v(" "),
+          _c("div", {
+            staticClass: "slider-img",
+            style: { backgroundImage: _vm.image }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "tex bottom" }, [_vm._v(_vm._s(_vm.text))])
+        ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -47072,7 +47120,7 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "home container", attrs: { id: "home" } },
-    [_c("slider")],
+    [_c("slider", { attrs: { slide: _vm.homeData } })],
     1
   )
 }

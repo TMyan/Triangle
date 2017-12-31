@@ -1,6 +1,6 @@
 <template>
     <div class="home container" id="home">
-        <slider></slider>
+        <slider :slide="homeData"></slider>
     </div>
 </template>
 
@@ -15,9 +15,6 @@
             return {
                homeData: []
             }
-        },
-        methods: {
-
         },
         created () {
             axios.get(window.location.pathname)

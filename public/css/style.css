@@ -122,7 +122,7 @@ html {
 
   .logo {
 
-    background-image: url("../images/logo/green.png");
+    background-image: url("../images/logo/black.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -140,7 +140,7 @@ html {
    	right: 2rem;
     text-align: center;
     font-size: 1.5rem;
-    color: #30e04fa3;
+    color: white;
    }
 
    .my-cart-btn:hover {
@@ -190,45 +190,105 @@ html {
 
 
 
-/* End Header */ 
+/* End Header */
 
 
 
 
 /* Home */
-     .home  {
-     	height: 28rem;
-     	background-color: black;
-     }
 
+.home  {
+    height: 28rem;
+    background-color: black;
+}
 
+/* Slider */
 
-     .home .slider {
-         width: 40%;
-         margin: auto;
-         text-align: center;
-         height: 100%;
-     }
+.slide {
+    display: none;
+}
 
-      .home .slider .img {
-          height: 75%;
-          width: 75%;
-          margin-left: 12.5%;
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: cover;
-          background-image: url("../images/5.jpg");
+.slider-img {
+    height: 75%;
+    width: 75%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.slide div {
+    height: 23rem;
+    width: 20rem;
+}
+.slide .tex {
+    width: 100%;
+    height: auto;
+    line-height: 1.5rem;
+    padding: .5rem 0;
+    color: #000000de;
+}
+
+.slide .slider-img {
+    height: 16rem;
+    width: 20rem;
+}
+.slide {
+    text-align:center;
+    margin:0 auto;
+}
+
+.slide h3 {
+    margin: 0 0 30px;
+}
+.slide .container {
+    height: 25rem;
+    margin: 0 auto;
+    margin-top: -2rem;
+    -webkit-perspective: 500px;
+    perspective: 500px;
+}
+.top, .bottom {
+    position: absolute;
+    bottom: 0;
+    -webkit-transform: rotateX(45deg);
+    transform: rotateX(45deg);
+    border-radius: 2px;
+    -webkit-animation: rotate 7s infinite;
+    animation: rotate 7s infinite;
+    -webkit-transition-timing-function: ease-in-out;
+}
+.top {
+    background: black;
+}
+.bottom {
+    -webkit-transform: rotateX(90deg);
+    transform: rotateX(90deg);
+    background: white;
+
+}
+.style-flat .top, .style-flat .bottom {
+    -webkit-transform-style: flat;
+    transform-style: flat;
+}
+.style-3d .top, .style-3d .bottom {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+@-webkit-keyframes rotate {
+    50% {
+        transform: none;
     }
-
-     .ti {
-        width: 75%;
-        margin-left: 12.5%;
-        height: 3rem;
-        padding-top: .5rem;
-        color: white;
+}
+@keyframes rotate {
+    50% {
+        transform: none;
     }
-    
- /* End Home */
+}
+
+
+/*End Slider*/
+
+/* End Home */
 
 
 
@@ -411,7 +471,7 @@ html {
     background-size: cover;
     max-width: 18rem;
     margin: 0 auto;
-    background-image: url("../images/1.jpg");
+    background-image: url("../images/appleIphoneX.jpg");
     height: 17rem;
     background-color: gray;
 }
