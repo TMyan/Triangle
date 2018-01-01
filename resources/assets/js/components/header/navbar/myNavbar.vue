@@ -14,6 +14,12 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item login-small-2">
+                <a class="nav-link" href="#">Login</a>
+            </li>
+            <li class="nav-item small-my-cart">
+                <a class="nav-link" href="#">My cart <i class="ion-android-cart"></i></a>
+            </li>
             <div class="form-inline my-2 my-lg-0">
                 <input class="search" type="search" placeholder="Search" >
                 <span class="search-btn"><i class="fa ion-android-search"></i></span>

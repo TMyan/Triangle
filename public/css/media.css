@@ -12,12 +12,16 @@
        display: block;
    }
 
+    #header .nav-link {
+        padding: .5rem 1rem 0 1rem;
+    }
+
    .vis {
     display: none;
    }
 
-   .logo {
-    margin-top: -1rem;
+   .header .logo {
+    margin-top: -2rem;
    }
 
    .submenu-product:hover ul {
@@ -29,7 +33,8 @@
    }
 
    .vis .nav > li {
-      width: 8rem;
+       width: 13rem;
+       margin-right: 6rem;
    }
 
    .login.small-l {
@@ -59,12 +64,21 @@
     .home .slider {
         width: 50%;
     }
+
+    .big-lang {
+        display: none;
+    }
+
+    .lang-block.small-lang {
+        display: block;
+        right: 5rem;
+    }
 }
 
 
 @media screen and (max-width: 768px) {
-     .logo {
-       margin-top: -1.5rem;
+    .header .logo {
+       margin-top: -2.4rem;
      }
 
      .abour-paragraph {
@@ -86,3 +100,37 @@
 
 }
 
+
+@media screen and (max-width: 576px) {
+    .my-cart-btn {
+        display: none;
+    }
+
+    .nav .small-my-cart {
+        display: block;
+    }
+
+    .navbar .small-l {
+        display: none;
+    }
+
+    .nav .login-small-2 {
+        display: block;
+    }
+
+    .vis .nav > li {
+        margin-right: 1rem;
+    }
+
+    .navbar .min-nav {
+        right: 3rem;
+    }
+
+    .footer .container div {
+        font-size: .6rem;
+    }
+
+    .lang-block.small-lang {
+        right: .5rem;
+    }
+}

@@ -1,4 +1,20 @@
 
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: rgba(245,245,245,0);
+}
+
+::-webkit-scrollbar
+{
+    width: 5px;
+    background-color:rgba(53,53,53,0.5);
+}
+
+::-webkit-scrollbar-thumb
+{
+    background-color: #353535;
+}
  
 html {
 	position: relative;
@@ -7,13 +23,13 @@ html {
 
  body {
       background-color: black!important;
-      margin-bottom: 7rem;
+      margin-bottom: 4rem;
     }
 
 
 .content {
  	padding-top: 10rem;
- 	padding-bottom: 7rem;
+ 	padding-bottom: 4rem;
 
 }
 
@@ -40,20 +56,16 @@ html {
   	text-decoration: none;
   }
 
-  .nav-link-t {
-    display: block;
-    margin: .5rem 1rem;
-    padding: .3rem 0;
-
-  }
-
+   .nav .nav-link {
+        padding: .5rem .7rem;
+    }
 
  .min-nav {
  	    display: none;
 	  	width: max-content;
 	    position: absolute;
 	    top: 1rem;
-	    right: 7rem;
+	    right: 8rem;
  }
 
  .min-nav div {
@@ -121,12 +133,11 @@ html {
 
 
   .logo {
-
     background-image: url("../images/logo/black.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: 13rem;
+    margin-top: -1rem;
     height: 8rem;
    } 
 
@@ -146,6 +157,14 @@ html {
    .my-cart-btn:hover {
    	color: #03ff30a3;
    }
+
+    .small-my-cart {
+        display: none;
+    }
+
+    .small-my-cart i {
+        padding-left: 1rem;
+    }
 
    .search-btn {
     width: 3rem;
@@ -187,7 +206,40 @@ html {
 
    }
 
+    .login-small-2 {
+        display: none;
+    }
 
+    .lang-block {
+        text-align: center;;
+        position: absolute;
+        color: white;
+        right: 6rem;
+        width: 2rem;
+        top: 1rem;
+        z-index: 1;
+    }
+
+    .lang  {
+        display: none;
+        width: 2rem;
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+    }
+
+    .lang:hover {
+        background-color: black;
+        color: white;
+    }
+
+    .small-lang {
+        display: none;
+    }
+
+    .lang-block:hover .lang  {
+        display: block;
+    }
 
 
 /* End Header */
@@ -301,10 +353,11 @@ html {
   }
 
   .abour-paragraph {
-  	max-height: 20rem;
+  	max-height: 18rem;
   	padding-top: 2rem;
   	font-size: 1.1rem;
-    overflow: scroll; 
+    overflow-x: hidden;
+    overflow-y: auto;
     text-align: justify;
   }
 
@@ -313,7 +366,6 @@ html {
   }
 
   .big-triangle-icon {
-  	background-image: url("../images/logo/black.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center; 
@@ -660,19 +712,19 @@ html {
      .footer {
        position: absolute;
        width: 100%;
-       height: 7rem;
+       height: 4rem;
        bottom:0;
      }
 
      .footer .container {
-     	height: 7rem;
+     	height: 4rem;
      	background-color: #969696;
      	text-align: center;
      }
 
      .footer .container div {
-     	height: 7rem;
-     	line-height: 7rem;
+     	height: 4rem;
+     	line-height: 4rem;
      	
      }
 

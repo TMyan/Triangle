@@ -1,10 +1,20 @@
 <template>
     <div class="header"  id="header">
         <div class="login big-l">Login</div>
+        <div class="lang-block big-lang">En
+            <div class="lang"><a>En</a></div>
+            <div class="lang"><a>Ru</a></div>
+            <div class="lang"><a>Am</a></div>
+        </div>
         <div class="container">
             <div class="row">
-                <div class="logo col-3"></div>
-                <nav class="navbar col-9 justify-content-end">
+                <div class="logo col-2"></div>
+                <nav class="navbar col-10 justify-content-end">
+                    <div class="lang-block small-lang">En
+                        <div class="lang"><a>En</a></div>
+                        <div class="lang"><a>Ru</a></div>
+                        <div class="lang"><a>Am</a></div>
+                    </div>
                     <div class="login small-l">Login</div>
                     <span class="my-cart-btn"><i class="ion-android-cart"></i></span>
                     <my-navbar></my-navbar>
