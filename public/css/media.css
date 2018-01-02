@@ -24,11 +24,7 @@
     margin-top: -2rem;
    }
 
-   .submenu-product:hover ul {
-    display: none;
-   }
-   
-   .submenu-service:hover ul {
+   .nav .submenu-product:hover ul {
     display: none;
    }
 

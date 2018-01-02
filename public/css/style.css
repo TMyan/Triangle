@@ -122,9 +122,6 @@ html {
  }
 
 
- .submenu-service:hover ul {
- 	display: block;
- }
 
  .service-nav a:hover  {
  	background-color: white;

@@ -43684,7 +43684,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.show[data-v-6da585c1] {\n    display: block;\n}\n", ""]);
 
 // exports
 
@@ -43732,8 +43732,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "my-header",
+    data: function data() {
+        return {
+            nav: false
+        };
+    },
+
+    methods: {
+        vis: function vis() {
+            if (this.nav) {
+                this.nav = false;
+            } else {
+                this.nav = true;
+            }
+        }
+    },
     components: {
         myNavbar: __WEBPACK_IMPORTED_MODULE_0__navbar_myNavbar___default.a
+    },
+    computed: {
+        lang: function lang() {
+            var lang = this.$store.state.language;
+            return lang.toUpperCase();
+        },
+        path: function path() {
+            return this.$route.path.slice(3);
+        }
     }
 });
 
@@ -43824,7 +43848,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.hide[data-v-325eb120] {\n    display: none !important;\n}\n", ""]);
 
 // exports
 
@@ -43871,7 +43895,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: "my-navbar",
     data: function data() {
         return {
-            navigation: {}
+            navigation: {},
+            hide: false
         };
     },
 
@@ -43884,17 +43909,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 status = false;
             }
             return status;
+        },
+        hideSubMenu: function hideSubMenu() {
+            var _this = this;
+
+            this.hide = true;
+            setTimeout(function () {
+                _this.hide = false;
+            }, 100);
         }
     },
     created: function created() {
-        var _this = this;
+        var _this2 = this;
 
         var lang = this.$store.state.language;
         var path = '/' + lang + '/navigation';
         if (!this.navigationStatus()) {
             axios.get(path).then(function (response) {
-                _this.navigation = response.data;
-                _this.$store.commit('navigation', true);
+                _this2.navigation = response.data;
+                _this2.$store.commit('navigation', true);
             }).catch(function (response) {
                 return console.log(response);
             });
@@ -43932,11 +43965,14 @@ var render = function() {
               nav.sub[0]
                 ? _c(
                     "ul",
-                    { staticClass: "products-nav" },
+                    { staticClass: "products-nav", class: { hide: _vm.hide } },
                     _vm._l(nav.sub, function(sub1, key) {
                       return _c(
                         "li",
-                        { staticClass: "nav-item submenu-company" },
+                        {
+                          staticClass: "nav-item submenu-company",
+                          on: { click: _vm.hideSubMenu }
+                        },
                         [
                           _c(
                             "router-link",
@@ -44052,7 +44088,20 @@ var render = function() {
   return _c("div", { staticClass: "header", attrs: { id: "header" } }, [
     _c("div", { staticClass: "login big-l" }, [_vm._v("Login")]),
     _vm._v(" "),
-    _vm._m(0),
+    _c("div", { staticClass: "lang-block big-lang" }, [
+      _vm._v(_vm._s(_vm.lang) + "\n        "),
+      _c("div", { staticClass: "lang" }, [
+        _c("a", { attrs: { href: "/en" + _vm.path } }, [_vm._v("En")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "lang" }, [
+        _c("a", { attrs: { href: "/ru" + _vm.path } }, [_vm._v("Ru")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "lang" }, [
+        _c("a", { attrs: { href: "/am" + _vm.path } }, [_vm._v("Am")])
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row" }, [
@@ -44062,15 +44111,34 @@ var render = function() {
           "nav",
           { staticClass: "navbar col-10 justify-content-end" },
           [
-            _vm._m(1),
+            _c("div", { staticClass: "lang-block small-lang" }, [
+              _vm._v(_vm._s(_vm.lang) + "\n                    "),
+              _c("div", { staticClass: "lang" }, [
+                _c("a", { attrs: { href: "/en" + _vm.path } }, [_vm._v("En")])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "lang" }, [
+                _c("a", { attrs: { href: "/ru" + _vm.path } }, [_vm._v("Ru")])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "lang" }, [
+                _c("a", { attrs: { href: "/am" + _vm.path } }, [_vm._v("Am")])
+              ])
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "login small-l" }, [_vm._v("Login")]),
             _vm._v(" "),
-            _vm._m(2),
+            _vm._m(0),
             _vm._v(" "),
-            _c("my-navbar"),
+            _c("my-navbar", { class: { show: _vm.nav } }),
             _vm._v(" "),
-            _vm._m(3)
+            _c("div", { staticClass: "min-nav", on: { click: _vm.vis } }, [
+              _c("div"),
+              _vm._v(" "),
+              _c("div"),
+              _vm._v(" "),
+              _c("div")
+            ])
           ],
           1
         )
@@ -44083,46 +44151,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "lang-block big-lang" }, [
-      _vm._v("En\n        "),
-      _c("div", { staticClass: "lang" }, [_c("a", [_vm._v("En")])]),
-      _vm._v(" "),
-      _c("div", { staticClass: "lang" }, [_c("a", [_vm._v("Ru")])]),
-      _vm._v(" "),
-      _c("div", { staticClass: "lang" }, [_c("a", [_vm._v("Am")])])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "lang-block small-lang" }, [
-      _vm._v("En\n                    "),
-      _c("div", { staticClass: "lang" }, [_c("a", [_vm._v("En")])]),
-      _vm._v(" "),
-      _c("div", { staticClass: "lang" }, [_c("a", [_vm._v("Ru")])]),
-      _vm._v(" "),
-      _c("div", { staticClass: "lang" }, [_c("a", [_vm._v("Am")])])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("span", { staticClass: "my-cart-btn" }, [
       _c("i", { staticClass: "ion-android-cart" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "min-nav" }, [
-      _c("div"),
-      _vm._v(" "),
-      _c("div"),
-      _vm._v(" "),
-      _c("div")
     ])
   }
 ]
