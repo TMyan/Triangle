@@ -49,11 +49,10 @@
                this.load = true;
            },
            slider () {
-               let title = 'title_' + this.lang
-               let text = 'text_' + this.lang;
-               this.title = (this.slide[this.ite])[title];
-               this.text = (this.slide[this.ite])[text];
-               this.image = "url(../images/" + this.slide[this.ite].image + ")";
+               let elem = this.slide[this.ite];
+               this.title = elem.title;
+               this.text = elem.text;
+               this.image = "url(../images/" + elem.image + ")";
                if (this.ite < this.length - 1) {
                    this.ite++
                }  else {

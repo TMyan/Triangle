@@ -9,7 +9,8 @@ export default new Vuex.Store ({
             navigation: false,
             footer: false
         },
-        language: 'en'
+        language: 'en',
+        showMinNav: false
     },
     mutations: {
         language (state, lang) {
@@ -20,6 +21,13 @@ export default new Vuex.Store ({
         },
         footer (state, status) {
             state.staticData.footer = status;
+        },
+        visMinNav (state) {
+           if (state.showMinNav) {
+               state.showMinNav = false;
+           } else {
+               state.showMinNav = true;
+           }
         }
     }
 })

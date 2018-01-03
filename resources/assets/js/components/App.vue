@@ -19,7 +19,7 @@
         },
         methods: {
             currentLanguage () {
-                let pathname = window.location.pathname;
+                let pathname = this.$route.path;
                 let language = pathname.split('/')[1];
                 return language;
             }

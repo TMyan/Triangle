@@ -1,7 +1,7 @@
 <template>
     <div class="vis">
         <ul class="nav">
-            <li v-for="nav in navigation" :class="{ 'submenu-product': nav.sub[0] }" class="nav-item">
+            <li v-for="nav in navigation" :class="{ 'submenu-product': nav.sub[0] }" class="nav-item" @click="hideMinNav">
                 <router-link :to="nav.alias" class="nav-link">{{nav.name}}</router-link>
                 <ul v-if="nav.sub[0]" class="products-nav" :class="{hide: hide}">
                     <li v-for="(sub1, key) in nav.sub" class="nav-item submenu-company" @click="hideSubMenu">
@@ -14,15 +14,15 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item login-small-2">
+            <li class="nav-item login-small-2" @click="hideMinNav">
                 <a class="nav-link" href="#">Login</a>
             </li>
-            <li class="nav-item small-my-cart">
+            <li class="nav-item small-my-cart" @click="hideMinNav">
                 <a class="nav-link" href="#">My cart <i class="ion-android-cart"></i></a>
             </li>
             <div class="form-inline my-2 my-lg-0">
                 <input class="search" type="search" placeholder="Search" >
-                <span class="search-btn"><i class="fa ion-android-search"></i></span>
+                <span class="search-btn" @click="hideMinNav"><i class="fa ion-android-search"></i></span>
             </div>
 
         </ul>
@@ -51,13 +51,18 @@
             hideSubMenu () {
                 this.hide = true;
                 setTimeout(() => {this.hide = false}, 100);
+            },
+            hideMinNav () {
+                if (this.$store.state.showMinNav) {
+                    this.$store.commit('visMinNav');
+                }
             }
         },
         created () {
             let lang = this.$store.state.language;
             let path = '/' + lang + '/navigation';
             if (! this.navigationStatus()) {
-                axios.get(path)
+                axios.post(path)
                     .then(response => {
                         this.navigation = response.data;
                         this.$store.commit('navigation', true);

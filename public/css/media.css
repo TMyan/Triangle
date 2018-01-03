@@ -45,7 +45,7 @@
     height: 50%;
    }
 
-   .form-el input {
+    .contact .form-el input {
       margin: 0;
     }
 
@@ -79,9 +79,9 @@
 
      .abour-paragraph {
        max-height: 15rem;
-     } 
+     }
 
-     .form-el input {
+    .contact .form-el input {
       margin: 0;
       width: 70%;
     } 

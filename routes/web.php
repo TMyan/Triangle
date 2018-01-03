@@ -3,10 +3,10 @@
 
 
 Route::redirect('/', '/en/home');
-Route::get('/{lang}/home', 'StartController@index')->name('home');
-Route::get('/{lang}/about', 'AboutController@index')->name('about');
-Route::match(['get', 'post'], '/{lang?}/contacts', 'ContactController@index')->name('contact');
-Route::match(['get', 'post'], '/{lang?}/services', 'ServiceController@index')->name('service');
+Route::match(['get', 'post'],'/{lang}/home', 'StartController@index')->name('home');
+Route::match(['get', 'post'],'/{lang}/about', 'AboutController@index')->name('about');
+Route::match(['get', 'post'], '/{lang}/contacts', 'ContactController@index')->name('contact');
+Route::match(['get', 'post'], '/{lang}/services', 'ServiceController@index')->name('service');
 
 Route::prefix('/{lang}/products')->group(function () {
     Route::match(['get', 'post'], '/{manufacturer}', 'ManufacturerController@index')->name('manufacturer');
@@ -22,5 +22,5 @@ Route::prefix('/{lang}/products')->group(function () {
 
 
 
-Route::get('{lang}/navigation', 'NavigationController@index');
-Route::get('{lang}/footer', 'FooterController@index');
+Route::post('{lang}/navigation', 'NavigationController@index');
+Route::post('{lang}/footer', 'FooterController@index');

@@ -17,7 +17,7 @@
                     </div>
                     <div class="login small-l">Login</div>
                     <span class="my-cart-btn"><i class="ion-android-cart"></i></span>
-                    <my-navbar :class="{show: nav}"></my-navbar>
+                    <my-navbar :class="{show: minNav}"></my-navbar>
                     <div @click="vis" class="min-nav">
                         <div></div>
                         <div></div>
@@ -35,16 +35,12 @@
         name: "my-header",
         data () {
             return {
-                 nav: false
+
             }
         },
         methods: {
           vis () {
-             if (this.nav) {
-                 this.nav = false;
-             } else {
-                 this.nav = true;
-             }
+             this.$store.commit('visMinNav');
           }
         },
         components: {
@@ -57,6 +53,9 @@
             },
             path () {
                 return (this.$route.path).slice(3);
+            },
+            minNav () {
+                return this.$store.state.showMinNav;
             }
         }
     }

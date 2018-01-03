@@ -23,12 +23,12 @@ export default new Router ({
             component: About
         },
         {
-            path: '/:lang(en|am|ru)/contact',
+            path: '/:lang(en|am|ru)/contacts',
             name: 'contact',
             component: Contact
         },
         {
-            path: '/:lang(en|am|ru)/service',
+            path: '/:lang(en|am|ru)/services',
             name: 'service',
             component: Service
         },

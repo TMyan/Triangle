@@ -8,12 +8,11 @@ use App\About;
 class AboutController extends SiteController
 {
     public function index(Request $request, $lang = 'en') {
-        if ($request->ajax()) {
+        if ($request->isMethod('post')) {
             $title = 'title_' . $lang;
             $text = 'text_' . $lang;
-            $aboutData = About::select($title, $text, 'image')->first();
-            $about = ['title' => $aboutData->$title, 'text' => $aboutData->$text, 'image' => $aboutData->image];
-            return response()->json($about);
+            $aboutData = About::select("$title as title", "$text as text", 'image')->first();
+            return response()->json($aboutData);
         } else {
             return view('triangle');
         }

@@ -22,6 +22,7 @@
        <div id="app"></div>
 
 
-    <script src="{{asset('js/app.js')}}"></script>
+       <script src="{{asset('js/app.js')}}"></script>
+       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9Ug_-AXdvB1Y53dcczzxHOfwKWjyvJuE"></script>
     </body>
 </html>

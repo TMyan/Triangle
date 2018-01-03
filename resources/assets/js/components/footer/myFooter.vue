@@ -29,7 +29,7 @@
             let lang = this.$store.state.language;
             let path = '/' + lang + '/footer';
             if (! this.footerStatus()) {
-                axios.get(path)
+                axios.post(path)
                      .then(response => {
                         this.footer = response.data;
                         this.$store.commit('footer', true);

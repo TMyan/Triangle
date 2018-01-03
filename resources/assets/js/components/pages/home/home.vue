@@ -17,7 +17,7 @@
             }
         },
         created () {
-            axios.get(window.location.pathname)
+            axios.post(this.$route.path)
                 .then(response => {
                     this.homeData = response.data;
                 })
