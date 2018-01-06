@@ -2,18 +2,7 @@
     <div v-if="loaded" class="contact container" id="contact">
         <div class="row">
             <div class=" col-md-6 ">
-                <div v-if="alertStatus">
-                    <div v-if="sendStatus" class="alert alertT alert-success" role="alert">
-                        Your message has been successfully sent.
-                    </div>
-                    <div v-else role="alert" class="alert alertT alert-danger"  >
-                        <h4 class="alert-heading">Error</h4>
-                        <div v-for="(message, key) in alertMessage">
-                            <p>{{key + ': ' + message[0]}}</p>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
+                <alert v-if="alertModal" :message="alertMessage" :status="sentStatus"></alert>
                 <div class="contact-block">
                     <h3 class="contact-title">{{contactData.title}}</h3>
                     <div class="contact-elem"><strong>Adress</strong><i>{{contactData.address}}</i></div>
@@ -58,7 +47,7 @@
             </div>
             <div class=" col-md-6">
                 <div class="contact-block">
-                    <maps></maps>
+                    <maps :latitude="+contactData.latitude" :longitude="+contactData.longitude"></maps>
                 </div>
             </div>
         </div>
@@ -67,10 +56,12 @@
 
 <script>
     import maps from './maps'
+    import alert from '../../auxiliary/alert'
     export default {
         name: "contact",
         components: {
-           maps
+           maps,
+           alert
         },
         data () {
            return{
@@ -81,9 +72,9 @@
                phone: '',
                subject: '',
                message: '',
-               sendStatus: null,
-               alertStatus: null,
-               alertMessage: null
+               sentStatus: null,
+               alertModal: null,
+               alertMessage: {},
            }
         },
         methods: {
@@ -99,24 +90,33 @@
                               data: true
                             })
                             .then(() => {
-                                this.alertStatus = true;
-                                this.sendStatus = true;
+                                this.alertModal = true;
+                                this.sentStatus = true;
+                                this.clearForm();
                                 setTimeout(() => {
-                                    this.alertStatus = null;
-                                    this.sendStatus = null;
-                                }, 3000);
+                                    this.errors.clear();
+                                    this.alertModal = null;
+                                    this.sentStatus = null;
+                                }, 2000);
                             })
                             .catch(error => {
                                 let errors = error.response.data.errors;
-                                this.alertStatus = true;
+                                this.alertModal = true;
                                 this.alertMessage = errors;
                                 setTimeout(() => {
-                                    this.alertStatus = null;
-                                    this.alertMessage = null;
+                                    this.alertModal = null;
+                                    this.alertMessage = {};
                                 }, 5000)
                             });
                     }
                 });
+            },
+            clearForm () {
+                this.name = '';
+                this.email = '';
+                this.phone = '';
+                this.subject = '';
+                this.message = '';
             }
         },
         created () {
@@ -131,10 +131,5 @@
 </script>
 
 <style scoped>
-    .alertT {
-        position: fixed;
-        left: 40rem;
-        top: 7rem;
-        z-index: 1;
-    }
+
 </style>

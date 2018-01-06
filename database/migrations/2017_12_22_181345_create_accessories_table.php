@@ -16,7 +16,7 @@ class CreateAccessoriesTable extends Migration
         Schema::create('accessories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('are_available');
-            $table->decimal('price');
+            $table->decimal('price', 10, 4);
             $table->string('like');
             $table->string('not_like');
             $table->text('options_en');

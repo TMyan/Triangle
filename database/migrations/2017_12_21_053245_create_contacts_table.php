@@ -27,6 +27,8 @@ class CreateContactsTable extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('image', 1000);
+            $table->decimal('latitude', 10, 6);
+            $table->decimal('longitude', 10, 6);
             $table->timestamps();
         });
     }

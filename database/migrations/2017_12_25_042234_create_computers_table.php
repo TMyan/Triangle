@@ -27,7 +27,7 @@ class CreateComputersTable extends Migration
             $table->string('graphic card');
             $table->string('odd');
             $table->string('status');
-            $table->decimal('price');
+            $table->decimal('price', 10, 4);
             $table->string('cache');
             $table->string('like');
             $table->string('not_like');

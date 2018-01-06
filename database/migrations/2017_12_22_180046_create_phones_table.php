@@ -37,7 +37,7 @@ class CreatePhonesTable extends Migration
             $table->string('sim');
             $table->string('like');
             $table->string('not_like');
-            $table->decimal('price');
+            $table->decimal('price', 10, 4);
             $table->text('options_en');
             $table->text('options_am');
             $table->text('options_ru');

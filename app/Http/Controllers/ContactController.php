@@ -14,7 +14,7 @@ class ContactController extends SiteController
                 $title = 'title_' . $lang;
                 $text = 'text_' . $lang;
                 $address = 'address_' . $lang;
-                $contactData = Contact::select("$title as title", "$text as text", "$address as address", 'email', 'phone', 'image')->first();
+                $contactData = Contact::select("$title as title", "$text as text", "$address as address", 'email', 'phone', 'image', 'latitude', 'longitude')->first();
                 return response()->json($contactData);
             } else {
                 $this->validate($request, [

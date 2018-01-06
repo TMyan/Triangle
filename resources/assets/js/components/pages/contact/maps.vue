@@ -10,21 +10,12 @@
         data: function () {
             return {
                 map: '',
-                markers: [
-                    {
-                        position: {
-                            latitude: 59.93,
-                            longitude: 30.32
-                        }
-                    },
-                    {
-                        position: {
-                            latitude: 59.928,
-                            longitude: 30.32
-                        }
-                    }
-                ]
+                marker: {}
             }
+        },
+        props: {
+            latitude: Number,
+            longitude: Number
         },
         computed: {
             mapMarkers: function () {
@@ -35,16 +26,13 @@
             const element = document.getElementById('mapTriangle')
             const options = {
                 zoom: 14,
-                center: new google.maps.LatLng(59.93, 30.32)
+                center: new google.maps.LatLng(this.latitude, this.longitude)
             }
             this.map = new google.maps.Map(element, options)
-
-            this.markers.forEach((marker) => {
-                const position = new google.maps.LatLng(marker.position.latitude, marker.position.longitude)
-                marker.map = this.map
-                marker.position = position
-                new google.maps.Marker(marker)
-            })
+            const position = new google.maps.LatLng(this.latitude, this.longitude)
+            this.marker.map = this.map
+            this.marker.position = position
+            new google.maps.Marker(this.marker)
         },
     }
 </script>

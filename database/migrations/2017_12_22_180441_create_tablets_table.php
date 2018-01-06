@@ -35,7 +35,7 @@ class CreateTabletsTable extends Migration
             $table->string('battery');
             $table->string('status');
             $table->string('sim');
-            $table->decimal('price');
+            $table->decimal('price', 10, 4);
             $table->string('usb');
             $table->string('like');
             $table->string('not_like');
