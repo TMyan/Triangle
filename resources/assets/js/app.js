@@ -18,7 +18,9 @@ window.Vue = require('vue');
 import App from './components/App'
 import router from './router/index'
 import store from './vuex/store'
+import VeeValidate from 'vee-validate'
 
+Vue.use(VeeValidate);
 const app = new Vue({
     el: '#app',
     template: '<App/>',

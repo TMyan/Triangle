@@ -411,10 +411,9 @@ html {
 } 
 
 .form-el input {
-	margin-right: 5rem;
-	padding-left: 1rem;
-	width: 60%;
-	float: right;
+	padding-left: .5rem;
+    margin-bottom: .5rem;
+	width: 100%;
 	border: none;
 	border-radius: 2px;
 }
