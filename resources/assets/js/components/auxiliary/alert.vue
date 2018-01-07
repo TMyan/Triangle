@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="pr">
         <div v-if="status" class="alert alertT alert-success" role="alert">
             Your message has been successfully sent.
         </div>
@@ -29,8 +29,13 @@
 <style scoped>
     .alertT {
         position: fixed;
-        left: 40rem;
-        top: 7rem;
+        margin-right: 3rem;
         z-index: 1;
+    }
+
+    .pr {
+        position: relative;
+        left: 3rem;
+        top: -3rem;
     }
 </style>

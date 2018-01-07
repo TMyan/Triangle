@@ -1,6 +1,7 @@
 <template>
-    <div v-if="loaded" class="about container" id="about">
-        <div class="row">
+    <div class="about container" id="about">
+        <spinner v-if="spinner" size="big" message="Loading..." line-fg-color="#000000"></spinner>
+        <div v-if="loaded" class="row">
             <div class="col-12 col-sm-6 abt">
                 <h3 class="about-header">{{aboutData.title}}</h3>
                 <p class="abour-paragraph">{{aboutData.text}}</p>
@@ -16,12 +17,17 @@
 </template>
 
 <script>
+    import Spinner from 'vue-simple-spinner'
     export default {
         name: "about",
+        components: {
+          Spinner
+        },
         data () {
             return {
                 aboutData: {},
-                loaded: false
+                loaded: false,
+                spinner: true
             }
         },
         created () {
@@ -29,8 +35,12 @@
                 .then(response => {
                     this.aboutData = response.data;
                     this.loaded = true;
+                    this.spinner = false;
                 })
-                .catch(response => console.log(response));
+                .catch(response => {
+                    console.log(response);
+                    this.spinner = false;
+                });
         }
     }
 </script>
