@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\About;
 
-class AboutController extends SiteController
+class AboutController extends Controller
 {
     public function index(Request $request, $lang = 'en') {
         if ($request->isMethod('post')) {

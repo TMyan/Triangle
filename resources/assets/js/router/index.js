@@ -8,6 +8,7 @@ import About from '../components/pages/about/about'
 import Contact from '../components/pages/contact/contact'
 import Service from '../components/pages/service/service'
 import Product from '../components/pages/product/product'
+import ProductDetails from '../components/pages/product/productDetails'
 
 export default new Router ({
     mode: 'history',
@@ -36,7 +37,13 @@ export default new Router ({
             path: '/:lang(en|am|ru)/products/:manufacturer(apple|samsung|lenovo|huawei_honor|microsoft)?' +
                   '/:category(phones|computers|tablets|accessories|smart_watches)?',
             name: 'product',
-            component: Product
+            component: Product,
+            children: [
+                {
+                    path: ':product(product_[1-9][0-9]*)',
+                    component: ProductDetails
+                }
+            ]
         }
     ]
 })

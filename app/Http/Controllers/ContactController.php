@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Contact;
 use Mockery\Exception;
 
-class ContactController extends SiteController
+class ContactController extends Controller
 {
     public function index(Request $request, $lang = 'en') {
         if ($request->isMethod('post')) {

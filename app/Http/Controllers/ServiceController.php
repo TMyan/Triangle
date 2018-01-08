@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Service;
 
-class ServiceController extends SiteController
+class ServiceController extends Controller
 {
     public function index(Request $request, $lang = 'en') {
         if ($request->isMethod('post')) {
