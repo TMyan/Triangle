@@ -45068,7 +45068,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         name: 'service',
         component: __WEBPACK_IMPORTED_MODULE_5__components_pages_service_service___default.a
     }, {
-        path: '/:lang(en|am|ru)/products/:manufacturer(apple|samsung|lenovo|huawei_honor|microsoft)?' + '/:category(phones|computers|tablets|accessories|smart_watches)?',
+        path: '/:lang(en|am|ru)/products/:category(phones|computers|tablets|accessories|smart_watches)' + '/:manufacturer(apple|samsung|lenovo|huawei_honor|microsoft)?',
         name: 'product',
         component: __WEBPACK_IMPORTED_MODULE_6__components_pages_product_product___default.a,
         children: [{

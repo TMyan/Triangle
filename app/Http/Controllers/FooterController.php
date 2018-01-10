@@ -7,7 +7,7 @@ use DB;
 
 class FooterController extends Controller
 {
-    public function index($lang = 'en') {
+    public function index($lang) {
         $text = "text_" . $lang;
         $footerData = DB::table('footer')->select('text_'.$lang)->get();
         $footer = [];

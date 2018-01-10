@@ -25,6 +25,7 @@ class CreateSmartWatchesTable extends Migration
             $table->string('not_like');
             $table->string('battery');
             $table->decimal('price', 10, 4);
+            $table->string('status');
             $table->text('options_en');
             $table->text('options_am');
             $table->text('options_ru');

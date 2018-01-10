@@ -7,7 +7,7 @@ use App\About;
 
 class AboutController extends Controller
 {
-    public function index(Request $request, $lang = 'en') {
+    public function index(Request $request, $lang) {
         if ($request->isMethod('post')) {
             $title = 'title_' . $lang;
             $text = 'text_' . $lang;

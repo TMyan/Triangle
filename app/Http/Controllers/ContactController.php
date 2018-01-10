@@ -8,7 +8,7 @@ use Mockery\Exception;
 
 class ContactController extends Controller
 {
-    public function index(Request $request, $lang = 'en') {
+    public function index(Request $request, $lang) {
         if ($request->isMethod('post')) {
             if (! $request->has('data')){
                 $title = 'title_' . $lang;
