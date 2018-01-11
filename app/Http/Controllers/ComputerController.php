@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Computer;
 
-class ComputerController extends Controller
+class ComputerController extends ProductController
 {
-    public function index($lang, $manufacturer = '', $product_id = '') {
+    public function __construct()
+    {
+        parent::__construct(new Computer() , 'computers');
+    }
 
+    public function index(Request $request, $lang, $manufacturer = null, $product_id = null) {
+        return $this->universal ($request, $lang, $manufacturer, $product_id);
     }
 }

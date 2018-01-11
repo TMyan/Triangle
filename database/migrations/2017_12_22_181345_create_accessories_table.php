@@ -18,8 +18,8 @@ class CreateAccessoriesTable extends Migration
             $table->string('are_available');
             $table->decimal('price', 10, 4);
             $table->string('status');
-            $table->string('like');
-            $table->string('not_like');
+            $table->integer('like')->default(0);
+            $table->integer('not_like')->default(0);
             $table->text('options_en');
             $table->text('options_am');
             $table->text('options_ru');

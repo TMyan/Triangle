@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Category;
 use App\Manufacturer;
 
@@ -24,7 +23,6 @@ class ProductController extends Controller
     }
 
 
-
     public function universal ($request, $lang, $manufacturer, $product_id) {
 
         $this->language = $lang;
@@ -35,7 +33,7 @@ class ProductController extends Controller
             if ($this->product_id) {
                 return $this->firstProduct();
             } else {
-
+                return $this->manyProduct($request);
             }
         } else {
             return view('triangle');
@@ -45,12 +43,9 @@ class ProductController extends Controller
 
     public function firstProduct () {
         $option = 'options_' . $this->language;
-        $productData = $this->table->select("$option as 'option'", 'photos')->where('id', $this->product_id)->first();
+        $productData = $this->table->select("$option as option", 'photos')->where('id', $this->product_id)->first();
         return response()->json($productData);
     }
-
-
-
 
 
     public function manyProduct($request) {
@@ -60,38 +55,54 @@ class ProductController extends Controller
         $count = null;
         $method = $this->category;
         if ($this->manufacturer) {
-            if ($request->input('option.filter')){
-
-
-            } else {
-                if ($request->input('option.count')) {
-                    $count = Manufacturer::where('name', $this->manufacturer)->$method()->count();
+            $manufacturer = Manufacturer::where('name', $this->manufacturer)->first();
+            if ($request->has('option.filter')){
+                $filter = $request->input('option.filter');
+                if ($request->has('option.count')){
+                    $count = $manufacturer->$method()->where($filter)->count();
                 }
-                $productsData = Manufacturer::where('name', $this->manufacturer)->$method()
-                    ->select('model', 'price', 'are_available', 'status', 'like', 'not_like', 'photos')
+                $productsData = $manufacturer->$method()
+                    ->select('id', 'model', 'price', 'are_available', 'status', 'like', 'not_like', 'photos')
+                    ->where($filter)
+                    ->skip($skip)->take($take)->get();
+            } else {
+                if ($request->has('option.count')) {
+                    $count = $manufacturer->$method()->count();
+                }
+                $productsData = $manufacturer->$method()
+                    ->select('id', 'model', 'price', 'are_available', 'status', 'like', 'not_like', 'photos')
                     ->skip($skip)->take($take)->get();
             }
 
         } else {
-            if ($request->input('option.filter')) {
-
+            if ($request->has('option.filter')) {
+                $filter = $request->input('option.filter');
+                if ($request->has('option.count')){
+                    $count = $this->table->where($filter)->count();
+                }
+                $productsData = $this->table->select('id', 'model', 'price', 'are_available', 'status', 'like', 'not_like', 'photos')
+                    ->where($filter)
+                    ->skip($skip)->take($take)->get();
             } else {
-                if ($request->input('option.count')) {
+                if ($request->has('option.count')) {
                     $count = $this->table->count();
                 }
-                $productsData = $this->table->select('model', 'price', 'are_available', 'status', 'like', 'not_like', 'photos')
+                $productsData = $this->table->select('id', 'model', 'price', 'are_available', 'status', 'like', 'not_like', 'photos')
                     ->skip($skip)->take($take)->get();
             }
         }
 
-        $filters = Category::where('name', $this->category)->filters;
+        $filters = $this->filters();
         return response()->json(['data' => $productsData, 'filters' => $filters, 'count' => $count]);
     }
 
+    public function filters () {
+        $name = 'name_' . $this->language;
+        $filter = 'filter_' . $this->language;
+        $category = Category::where('name', $this->category)->first();
+        $filters = $category->filters()->select("$name as name", "$filter as filter")->get();
 
-    public function filterParse ($filter) {
-
+       return $filters;
     }
-
 
 }

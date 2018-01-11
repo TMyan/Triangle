@@ -35,8 +35,8 @@ class CreatePhonesTable extends Migration
             $table->string('battery');
             $table->string('status');
             $table->string('sim');
-            $table->string('like');
-            $table->string('not_like');
+            $table->integer('like')->default(0);
+            $table->integer('not_like')->default(0);
             $table->decimal('price', 10, 4);
             $table->text('options_en');
             $table->text('options_am');

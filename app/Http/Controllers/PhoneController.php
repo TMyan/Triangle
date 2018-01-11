@@ -7,14 +7,12 @@ use App\Phone;
 
 class PhoneController extends ProductController
 {
-    use Product;
-
     public function __construct()
     {
         parent::__construct(new Phone() , 'phones');
     }
 
     public function index(Request $request, $lang, $manufacturer = null, $product_id = null) {
-         $this->universal ($request, $lang, $manufacturer, $product_id);
+         return $this->universal ($request, $lang, $manufacturer, $product_id);
     }
 }

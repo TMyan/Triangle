@@ -77,8 +77,8 @@
        max-height: 15rem;
      }
 
-    .p-vote {
-      left: 57%;
+    .product-elem .p-vote {
+      left: 52%;
     }
 
     .home .slider {
@@ -103,6 +103,10 @@
 
     .nav .login-small-2 {
         display: block;
+    }
+
+    .product-elem .p-cart {
+        left: 64%;
     }
 
     .vis .nav > li {

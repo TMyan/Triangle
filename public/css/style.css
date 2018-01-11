@@ -509,10 +509,10 @@ html {
 
 .product-elem {
     background-color: white;
-    height: 29rem;
+    height: 30rem;
     border: 3px solid;
     border-color: #000000ed;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .p-photo {
@@ -522,7 +522,7 @@ html {
     max-width: 18rem;
     margin: 0 auto;
     background-image: url("../images/appleIphoneX.jpg");
-    height: 17rem;
+    height: 18rem;
     background-color: gray;
 }
 
@@ -531,7 +531,7 @@ html {
     height: 2rem;
     background-color: #5bc388;
     position: relative;
-    top: -17rem;
+    top: -18rem;
     text-align: center;
     line-height: 2rem;
     color: black;
@@ -552,7 +552,7 @@ html {
 
 .p-price span {
 	padding-left: 1rem;
-	color: #d2ffda;
+	color: #2eda4d;
 }
 
 .p-cart {

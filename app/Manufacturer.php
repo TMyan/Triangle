@@ -7,22 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class Manufacturer extends Model
 {
     public function phones() {
-        $this->hasMany('App\Phone');
+       return $this->hasMany('App\Phone');
     }
 
     public function computers() {
-        $this->hasMany('App\Computer');
+        return $this->hasMany('App\Computer');
     }
 
     public function tablets() {
-        $this->hasMany('App\Tablet');
+        return $this->hasMany('App\Tablet');
     }
 
     public function smartWatches() {
-        $this->hasMany('App\SmartWatch');
+        return $this->hasMany('App\SmartWatch');
     }
 
     public function accessories() {
-        $this->hasMany('App\Accessories');
+        return $this->hasMany('App\Accessories');
     }
 }
