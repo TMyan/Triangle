@@ -35,10 +35,10 @@ class CreateTabletsTable extends Migration
             $table->string('battery');
             $table->string('status');
             $table->string('sim');
+            $table->integer('likes')->default(0);
+            $table->integer('dislikes')->default(0);
             $table->decimal('price', 10, 4);
             $table->string('usb');
-            $table->integer('like')->default(0);
-            $table->integer('not_like')->default(0);
             $table->text('options_en');
             $table->text('options_am');
             $table->text('options_ru');

@@ -50026,7 +50026,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50083,139 +50083,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "product",
     data: function data() {
         return {
-            path: this.$route.path + '/product_1'
-        };
-    },
-    created: function created() {
-        axios.post(this.$route.path, {
-            option: {
+            options: {
                 skip: 0,
                 take: 6,
-                count: '',
-                filter: [['status', '=', 'old']]
+                count: true,
+                filter: undefined
             },
-            name: ''
+            loadProduct: false,
+            request: undefined,
+            response: undefined
+        };
+    },
+
+    methods: {
+        requestData: function requestData() {
+            for (var option in this.options) {}
+        },
+        productFilter: function productFilter(filter) {
+            console.log(filter);
+            this.$router.push(filter);
+        }
+    },
+    created: function created() {
+        var _this = this;
+
+        axios.post(this.$route.path, {
+            options: {
+                skip: this.options.skip,
+                take: this.options.take,
+                count: this.options.count
+            }
         }).then(function (response) {
-            console.log(response.data);
+            _this.response = response.data;
+            _this.loadProduct = true;
         }).catch(function (response) {
             console.log(response);
         });
@@ -50230,18 +50135,115 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "product container", attrs: { id: "product" } },
+    [
+      _vm.loadProduct
+        ? _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-md-3 filters" },
+              [
+                _c("h5", [_vm._v("Filters")]),
+                _vm._v(" "),
+                _vm._l(_vm.response.filters, function(filter) {
+                  return _c("div", { staticClass: "filter" }, [
+                    _c("div", { staticClass: "f-par" }, [
+                      _c("span", [_vm._v(_vm._s(filter.name))]),
+                      _vm._v(" "),
+                      _vm._m(0, true)
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      _vm._l(filter.data.filter, function(value, index) {
+                        return _c("div", [
+                          _c("div", { staticClass: "fcp" }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "fnp",
+                              on: {
+                                click: function($event) {
+                                  _vm.productFilter([
+                                    filter.data.column,
+                                    filter.data.condition,
+                                    filter.data.values[index]
+                                  ])
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(value))]
+                          )
+                        ])
+                      })
+                    )
+                  ])
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _vm._m(1)
+          ])
+        : _vm._e()
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "product container", attrs: { id: "product" } },
-      [_c("div", { staticClass: "row" })]
-    )
+    return _c("div", { staticClass: "f-ic" }, [
+      _c("i", { staticClass: "ion-android-arrow-dropdown" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-9 p-block" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-6  product-elem" }, [
+          _c("div", { staticClass: "p-photo" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-status" }, [_vm._v("New")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-title" }, [
+            _vm._v("Սմարթֆոն Apple iPhone SE 32GB Gold (A1723)")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-price" }, [
+            _c("strong", [_vm._v("Price.")]),
+            _vm._v(" "),
+            _c("span", [_vm._v("1000$")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-cart" }, [
+            _c("span", [_vm._v("add")]),
+            _vm._v(" "),
+            _c("span", [_c("i", { staticClass: "ion-android-cart" })])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-option" }, [
+            _c("span", { staticClass: "p-more" }, [_vm._v("More")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-vote" }, [
+            _c("span", { staticClass: "p-like ion-thumbsup" }, [
+              _c("sub", [_vm._v("123m")])
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "p-notLike ion-thumbsdown" }, [
+              _c("sub", [_vm._v("679k")])
+            ])
+          ])
+        ])
+      ])
+    ])
   }
 ]
 render._withStripped = true

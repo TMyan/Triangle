@@ -9,14 +9,6 @@ export default new Vuex.Store ({
             navigation: false,
             footer: false
         },
-        product: {
-            option: {
-                skip: 0,
-                take: 6,
-                count: true,
-                filter: undefined
-            }
-        },
         language: 'en',
         showMinNav: false
     },

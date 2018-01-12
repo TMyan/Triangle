@@ -21,8 +21,8 @@ class CreateSmartWatchesTable extends Migration
             $table->string('bluetooth');
             $table->string('accelerometer');
             $table->string('rom');
-            $table->integer('like')->default(0);
-            $table->integer('not_like')->default(0);
+            $table->integer('likes')->default(0);
+            $table->integer('dislikes')->default(0);
             $table->string('battery');
             $table->decimal('price', 10, 4);
             $table->string('status');

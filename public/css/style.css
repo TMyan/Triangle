@@ -509,7 +509,7 @@ html {
 
 .product-elem {
     background-color: white;
-    height: 30rem;
+    height: 29rem;
     border: 3px solid;
     border-color: #000000ed;
     margin-bottom: 1rem;
@@ -544,6 +544,7 @@ html {
 .p-title {
 	height: 3rem;
 	overflow: hidden;
+    margin-top: -1rem;
 }
 
 .p-price {

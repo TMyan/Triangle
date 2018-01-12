@@ -50,44 +50,44 @@ class ProductController extends Controller
 
     public function manyProduct($request) {
 
-        $skip = $request->input('option.skip');
-        $take = $request->input('option.take');
+        $skip = $request->input('options.skip');
+        $take = $request->input('options.take');
         $count = null;
         $method = $this->category;
         if ($this->manufacturer) {
             $manufacturer = Manufacturer::where('name', $this->manufacturer)->first();
-            if ($request->has('option.filter')){
-                $filter = $request->input('option.filter');
-                if ($request->has('option.count')){
+            if ($request->has('options.filter')){
+                $filter = $request->input('options.filter');
+                if ($request->has('options.count')){
                     $count = $manufacturer->$method()->where($filter)->count();
                 }
                 $productsData = $manufacturer->$method()
-                    ->select('id', 'model', 'price', 'are_available', 'status', 'like', 'not_like', 'photos')
+                    ->select('id', 'model', 'price', 'are_available', 'status', 'likes', 'dislikes', 'photos')
                     ->where($filter)
                     ->skip($skip)->take($take)->get();
             } else {
-                if ($request->has('option.count')) {
+                if ($request->has('options.count')) {
                     $count = $manufacturer->$method()->count();
                 }
                 $productsData = $manufacturer->$method()
-                    ->select('id', 'model', 'price', 'are_available', 'status', 'like', 'not_like', 'photos')
+                    ->select('id', 'model', 'price', 'are_available', 'status', 'likes', 'dislikes', 'photos')
                     ->skip($skip)->take($take)->get();
             }
 
         } else {
-            if ($request->has('option.filter')) {
-                $filter = $request->input('option.filter');
-                if ($request->has('option.count')){
+            if ($request->has('options.filter')) {
+                $filter = $request->input('options.filter');
+                if ($request->has('options.count')){
                     $count = $this->table->where($filter)->count();
                 }
-                $productsData = $this->table->select('id', 'model', 'price', 'are_available', 'status', 'like', 'not_like', 'photos')
+                $productsData = $this->table->select('id', 'model', 'price', 'are_available', 'status', 'likes', 'dislikes', 'photos')
                     ->where($filter)
                     ->skip($skip)->take($take)->get();
             } else {
-                if ($request->has('option.count')) {
+                if ($request->has('options.count')) {
                     $count = $this->table->count();
                 }
-                $productsData = $this->table->select('id', 'model', 'price', 'are_available', 'status', 'like', 'not_like', 'photos')
+                $productsData = $this->table->select('id', 'model', 'price', 'are_available', 'status', 'likes', 'dislikes', 'photos')
                     ->skip($skip)->take($take)->get();
             }
         }
@@ -98,10 +98,12 @@ class ProductController extends Controller
 
     public function filters () {
         $name = 'name_' . $this->language;
-        $filter = 'filter_' . $this->language;
+        $data = 'filter_' . $this->language;
         $category = Category::where('name', $this->category)->first();
-        $filters = $category->filters()->select("$name as name", "$filter as filter")->get();
-
+        $filters = $category->filters()->select("$name as name", "$data as data")->get();
+        foreach ($filters as $filter) {
+            $filter->data = json_decode($filter->data);
+        }
        return $filters;
     }
 
