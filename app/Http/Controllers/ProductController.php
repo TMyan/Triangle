@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Manufacturer;
+
 
 class ProductController extends Controller
 {
     public $table;
-    public $category ;
+    public $category;
     public $language;
-    public $manufacturer;
     public $product_id;
 
     public function __construct($table, $category)
@@ -18,15 +17,13 @@ class ProductController extends Controller
         $this->table = $table;
         $this->category = $category;
         $this->language = null;
-        $this->manufacturer = null;
         $this->product_id = null;
     }
 
 
-    public function universal ($request, $lang, $manufacturer, $product_id) {
+    public function universal ($request, $lang, $product_id) {
 
         $this->language = $lang;
-        $this->manufacturer = $manufacturer;
         $this->product_id = $product_id ? (explode('_', $product_id))[1] : null;
 
         if ($request->isMethod('post')) {
@@ -50,50 +47,44 @@ class ProductController extends Controller
 
     public function manyProduct($request) {
 
-        $skip = $request->input('options.skip');
-        $take = $request->input('options.take');
+        $skip = config('product.skip');
+        $take = config('product.take');
+        $page = $request->has('options.page') ? $request->input('options.page') : 1;
         $count = null;
-        $method = $this->category;
-        if ($this->manufacturer) {
-            $manufacturer = Manufacturer::where('name', $this->manufacturer)->first();
-            if ($request->has('options.filter')){
-                $filter = $request->input('options.filter');
-                if ($request->has('options.count')){
-                    $count = $manufacturer->$method()->where($filter)->count();
-                }
-                $productsData = $manufacturer->$method()
-                    ->select('id', 'model', 'price', 'are_available', 'status', 'likes', 'dislikes', 'photos')
-                    ->where($filter)
-                    ->skip($skip)->take($take)->get();
-            } else {
-                if ($request->has('options.count')) {
-                    $count = $manufacturer->$method()->count();
-                }
-                $productsData = $manufacturer->$method()
-                    ->select('id', 'model', 'price', 'are_available', 'status', 'likes', 'dislikes', 'photos')
-                    ->skip($skip)->take($take)->get();
-            }
 
+        if (! $request->has('options')) {
+            $count = $this->table->count();
+            $productsData = $this->table->select('id', 'model', 'price', 'are_available', 'status', 'likes', 'dislikes', 'photo')->take($take)->get();
+            $filters = $this->filters();
+            return response()->json(['data' => $productsData, 'filters' => $filters, 'count' => $count]);
         } else {
             if ($request->has('options.filter')) {
                 $filter = $request->input('options.filter');
-                if ($request->has('options.count')){
-                    $count = $this->table->where($filter)->count();
+                $whereIn = $filter[0];
+                $where = $filter[1];
+                $query = $this->table;
+                foreach ($whereIn as $item) {
+                    $query = $query->whereIn($item[0], $item[1]);
                 }
-                $productsData = $this->table->select('id', 'model', 'price', 'are_available', 'status', 'likes', 'dislikes', 'photos')
-                    ->where($filter)
-                    ->skip($skip)->take($take)->get();
+                if (count($where)) {
+                   $query = $query->where($where);
+                }
+                $productsData = $query->select('id', 'model', 'price', 'are_available', 'status', 'likes', 'dislikes', 'photo')
+                                      ->skip($skip * ($page - 1))->take($take)->get();
+                if ($request->has('options.count')){
+                    $count = $query->count();
+                }
             } else {
                 if ($request->has('options.count')) {
                     $count = $this->table->count();
                 }
-                $productsData = $this->table->select('id', 'model', 'price', 'are_available', 'status', 'likes', 'dislikes', 'photos')
-                    ->skip($skip)->take($take)->get();
+                $productsData = $this->table->select('id', 'model', 'price', 'are_available', 'status', 'likes', 'dislikes', 'photo')
+                    ->skip($skip * ($page - 1))->take($take)->get();
             }
+
+            return response()->json(['data' => $productsData, 'count' => $count]);
         }
 
-        $filters = $this->filters();
-        return response()->json(['data' => $productsData, 'filters' => $filters, 'count' => $count]);
     }
 
     public function filters () {

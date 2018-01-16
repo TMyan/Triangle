@@ -29,6 +29,7 @@ class CreateSmartWatchesTable extends Migration
             $table->text('options_en');
             $table->text('options_am');
             $table->text('options_ru');
+            $table->string('photo');
             $table->string('photos', 1000);
             $table->timestamps();
         });

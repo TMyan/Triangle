@@ -12,7 +12,7 @@ class AccessoriesController extends ProductController
         parent::__construct(new Accessories() , 'accessories');
     }
 
-    public function index(Request $request, $lang, $manufacturer = null, $product_id = null) {
-        return $this->universal ($request, $lang, $manufacturer, $product_id);
+    public function index(Request $request, $lang, $product_id = null) {
+        return $this->universal ($request, $lang, $product_id);
     }
 }

@@ -44698,11 +44698,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "my-navbar",
@@ -44785,7 +44780,7 @@ var render = function() {
                 ? _c(
                     "ul",
                     { staticClass: "products-nav", class: { hide: _vm.hide } },
-                    _vm._l(nav.sub, function(sub1, key) {
+                    _vm._l(nav.sub, function(sub1) {
                       return _c(
                         "li",
                         {
@@ -44800,34 +44795,7 @@ var render = function() {
                               attrs: { to: sub1.alias }
                             },
                             [_vm._v(_vm._s(sub1.name))]
-                          ),
-                          _vm._v(" "),
-                          sub1.sub[0]
-                            ? _c(
-                                "ul",
-                                {
-                                  staticClass: "products-nav-elem",
-                                  style: { top: key * 2.5 + "rem" }
-                                },
-                                _vm._l(sub1.sub, function(sub2) {
-                                  return _c(
-                                    "li",
-                                    { staticClass: "nav-item" },
-                                    [
-                                      _c(
-                                        "router-link",
-                                        {
-                                          staticClass: "nav-link",
-                                          attrs: { to: sub2.alias }
-                                        },
-                                        [_vm._v(_vm._s(sub2.name))]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                })
-                              )
-                            : _vm._e()
+                          )
                         ],
                         1
                       )
@@ -45068,7 +45036,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         name: 'service',
         component: __WEBPACK_IMPORTED_MODULE_5__components_pages_service_service___default.a
     }, {
-        path: '/:lang(en|am|ru)/products/:category(phones|computers|tablets|accessories|smart_watches)' + '/:manufacturer(apple|samsung|lenovo|huawei_honor|microsoft)?',
+        path: '/:lang(en|am|ru)/products/:category(phones|computers|tablets|accessories|smartWatches)',
         name: 'product',
         component: __WEBPACK_IMPORTED_MODULE_6__components_pages_product_product___default.a,
         children: [{
@@ -50026,7 +49994,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50037,6 +50005,12 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_simple_spinner__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_simple_spinner___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_simple_spinner__);
+//
+//
+//
+//
 //
 //
 //
@@ -50084,47 +50058,148 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "product",
+    components: {
+        Spinner: __WEBPACK_IMPORTED_MODULE_0_vue_simple_spinner___default.a
+    },
     data: function data() {
         return {
             options: {
-                skip: 0,
-                take: 6,
+                page: 1,
                 count: true,
                 filter: undefined
             },
+            response: {
+                data: {},
+                filters: {},
+                count: undefined
+            },
+            spinnerPage: true,
+            spinnerProduct: true,
+            loadPage: false,
             loadProduct: false,
-            request: undefined,
-            response: undefined
+            filters: []
         };
     },
 
     methods: {
-        requestData: function requestData() {
-            for (var option in this.options) {}
+        category: function category() {
+            var _this = this;
+
+            axios.post(this.$route.path).then(function (response) {
+                _this.response = response.data;
+                _this.loadPage = true;
+                _this.loadProduct = true;
+                _this.spinnerPage = false;
+                _this.spinnerProduct = false;
+            }).catch(function (response) {
+                _this.spinnerPage = false;
+                console.log(response);
+            });
         },
-        productFilter: function productFilter(filter) {
-            console.log(filter);
-            this.$router.push(filter);
+        active: function active(event) {
+            var elem = event.currentTarget.firstChild;
+            if (elem.classList.contains("checkActive")) {
+                elem.classList.remove("checkActive");
+            } else {
+                elem.classList.add("checkActive");
+            }
+        },
+        requestData: function requestData() {
+            var _this2 = this;
+
+            this.loadProduct = false;
+            this.spinnerProduct = true;
+            var options = this.options;
+            var request = {
+                options: {}
+            };
+            for (var option in options) {
+                if (options[option]) {
+                    request.options[option] = options[option];
+                }
+            }
+
+            axios.post(this.$route.path, request).then(function (response) {
+                _this2.loadProduct = true;
+                _this2.spinnerProduct = false;
+                _this2.response.data = response.data.data;
+                if (response.data.count) {
+                    _this2.response.count = response.data.count;
+                }
+            }).catch(function (response) {
+                _this2.spinnerProduct = false;
+                console.log(response);
+            });
+        },
+        productFilter: function productFilter(filter, event) {
+            this.active(event);
+            var filters = this.filters;
+            var where = [];
+            var whereIn = [];
+            var stat2 = true;
+            for (var i = 0; i < filters.length; i++) {
+                if (filters[i][0] === filter[0]) {
+                    var elems = filters[i][2];
+                    var stat1 = false;
+                    for (var j = 0; j < elems.length; j++) {
+                        if (elems[j] === filter[2]) {
+                            elems.splice(j, 1);
+                            if (!elems.length) {
+                                this.filters.splice(i, 1);
+                            }
+                            stat1 = false;
+                            break;
+                        } else {
+                            stat1 = true;
+                        }
+                    }
+                    if (stat1) {
+                        this.filters[i][2].push(filter[2]);
+                    }
+                    stat2 = false;
+                    break;
+                } else {
+                    stat2 = true;
+                }
+            }
+
+            if (stat2) {
+                this.filters.push([filter[0], filter[1], [filter[2]]]);
+            }
+
+            if (this.filters.length) {
+                for (var _i = 0; _i < filters.length; _i++) {
+                    if (filters[_i][2][1]) {
+                        whereIn.push([filters[_i][0], filters[_i][2]]);
+                    } else {
+                        where.push([filters[_i][0], filters[_i][1], filters[_i][2][0]]);
+                    }
+                }
+
+                this.options.filter = [whereIn, where];
+                this.options.count = true;
+            } else {
+                this.options.filter = undefined;
+                this.options.count = true;
+            }
+
+            this.requestData();
         }
     },
     created: function created() {
-        var _this = this;
+        this.category();
+    },
 
-        axios.post(this.$route.path, {
-            options: {
-                skip: this.options.skip,
-                take: this.options.take,
-                count: this.options.count
-            }
-        }).then(function (response) {
-            _this.response = response.data;
-            _this.loadProduct = true;
-        }).catch(function (response) {
-            console.log(response);
-        });
+    watch: {
+        '$route': function $route() {
+            this.loadProduct = false;
+            this.category();
+        }
     }
+
 });
 
 /***/ }),
@@ -50139,7 +50214,17 @@ var render = function() {
     "div",
     { staticClass: "product container", attrs: { id: "product" } },
     [
-      _vm.loadProduct
+      _vm.spinnerPage
+        ? _c("spinner", {
+            attrs: {
+              size: "big",
+              message: "Loading...",
+              "line-fg-color": "#000000"
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.loadPage
         ? _c("div", { staticClass: "row" }, [
             _c(
               "div",
@@ -50159,23 +50244,30 @@ var render = function() {
                       "div",
                       _vm._l(filter.data.filter, function(value, index) {
                         return _c("div", [
-                          _c("div", { staticClass: "fcp" }),
-                          _vm._v(" "),
                           _c(
                             "div",
                             {
-                              staticClass: "fnp",
+                              staticClass: "wMax",
                               on: {
                                 click: function($event) {
-                                  _vm.productFilter([
-                                    filter.data.column,
-                                    filter.data.condition,
-                                    filter.data.values[index]
-                                  ])
+                                  _vm.productFilter(
+                                    [
+                                      filter.data.column,
+                                      filter.data.condition,
+                                      filter.data.values[index]
+                                    ],
+                                    $event
+                                  )
                                 }
                               }
                             },
-                            [_vm._v(_vm._s(value))]
+                            [
+                              _c("div", { staticClass: "fcp" }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "fnp" }, [
+                                _vm._v(_vm._s(value))
+                              ])
+                            ]
                           )
                         ])
                       })
@@ -50186,10 +50278,85 @@ var render = function() {
               2
             ),
             _vm._v(" "),
-            _vm._m(1)
+            _c(
+              "div",
+              { staticClass: "col-md-9 p-block" },
+              [
+                _vm.spinnerProduct
+                  ? _c("spinner", {
+                      attrs: {
+                        size: "medium",
+                        message: "Loading...",
+                        "line-fg-color": "#000000"
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.loadProduct
+                  ? _c(
+                      "div",
+                      { staticClass: "row" },
+                      _vm._l(_vm.response.data, function(product) {
+                        return _c(
+                          "div",
+                          {
+                            staticClass:
+                              "col-lg-4 col-md-6 col-sm-6  product-elem"
+                          },
+                          [
+                            _c("div", {
+                              staticClass: "p-photo",
+                              style: {
+                                backgroundImage:
+                                  "url(../images/products/" +
+                                  product.photo +
+                                  ")"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "p-status" }, [
+                              _vm._v(_vm._s(product.status))
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "p-title" }, [
+                              _vm._v(_vm._s(product.model))
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "p-price" }, [
+                              _c("strong", [_vm._v("Price.")]),
+                              _vm._v(" "),
+                              _c("span", [_vm._v(_vm._s(product.price) + "$")])
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(1, true),
+                            _vm._v(" "),
+                            _vm._m(2, true),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "p-vote" }, [
+                              _c(
+                                "span",
+                                { staticClass: "p-like ion-thumbsup" },
+                                [_c("sub", [_vm._v(_vm._s(product.likes))])]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                { staticClass: "p-notLike ion-thumbsdown" },
+                                [_c("sub", [_vm._v(_vm._s(product.dislikes))])]
+                              )
+                            ])
+                          ]
+                        )
+                      })
+                    )
+                  : _vm._e()
+              ],
+              1
+            )
           ])
         : _vm._e()
-    ]
+    ],
+    1
   )
 }
 var staticRenderFns = [
@@ -50205,44 +50372,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-9 p-block" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-6  product-elem" }, [
-          _c("div", { staticClass: "p-photo" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-status" }, [_vm._v("New")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-title" }, [
-            _vm._v("Սմարթֆոն Apple iPhone SE 32GB Gold (A1723)")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-price" }, [
-            _c("strong", [_vm._v("Price.")]),
-            _vm._v(" "),
-            _c("span", [_vm._v("1000$")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-cart" }, [
-            _c("span", [_vm._v("add")]),
-            _vm._v(" "),
-            _c("span", [_c("i", { staticClass: "ion-android-cart" })])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-option" }, [
-            _c("span", { staticClass: "p-more" }, [_vm._v("More")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-vote" }, [
-            _c("span", { staticClass: "p-like ion-thumbsup" }, [
-              _c("sub", [_vm._v("123m")])
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "p-notLike ion-thumbsdown" }, [
-              _c("sub", [_vm._v("679k")])
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "p-cart" }, [
+      _c("span", [_vm._v("add")]),
+      _vm._v(" "),
+      _c("span", [_c("i", { staticClass: "ion-android-cart" })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-option" }, [
+      _c("span", { staticClass: "p-more" }, [_vm._v("More")])
     ])
   }
 ]

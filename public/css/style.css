@@ -497,10 +497,19 @@ html {
 .fnp {
 	display: inline-block;
 	padding-left: 1rem;
+    color: #7b7b7b;
 }
 
 .fnp:hover {
    color: #62a762;
+}
+
+.wMax {
+    width: max-content;
+}
+
+.checkActive {
+    background-color: #00c4a7;
 }
 
 .fpe {
@@ -521,7 +530,6 @@ html {
     background-size: cover;
     max-width: 18rem;
     margin: 0 auto;
-    background-image: url("../images/appleIphoneX.jpg");
     height: 18rem;
     background-color: gray;
 }

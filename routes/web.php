@@ -10,11 +10,11 @@ Route::match(['get', 'post'], '/{lang}/services', 'ServiceController@index')->na
 
 Route::prefix('/{lang}/products')->group(function () {
     Route::redirect('/', '/{lang}/products/phones');
-    Route::match(['get', 'post'], '/phones/{manufacturer?}/{product_id?}', 'PhoneController@index')->name('phone');
-    Route::match(['get', 'post'], '/computers/{manufacturer?}/{product_id?}', 'ComputerController@index')->name('computer');
-    Route::match(['get', 'post'], '/tablets/{manufacturer?}/{product_id?}', 'TabletController@index')->name('tablet');
-    Route::match(['get', 'post'], '/smart_watches/{manufacturer?}/{product_id?}', 'SmartWatchesController@index')->name('smartWatch');
-    Route::match(['get', 'post'], '/accessories/{manufacturer?}/{product_id?}', 'AccessoriesController@index')->name('accessories');
+    Route::match(['get', 'post'], '/phones/{product_id?}', 'PhoneController@index')->name('phone');
+    Route::match(['get', 'post'], '/computers/{product_id?}', 'ComputerController@index')->name('computer');
+    Route::match(['get', 'post'], '/tablets/{product_id?}', 'TabletController@index')->name('tablet');
+    Route::match(['get', 'post'], '/smartWatches/{product_id?}', 'SmartWatchesController@index')->name('smartWatch');
+    Route::match(['get', 'post'], '/accessories/{product_id?}', 'AccessoriesController@index')->name('accessories');
 });
 
 

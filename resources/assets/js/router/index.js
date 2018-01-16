@@ -34,8 +34,7 @@ export default new Router ({
             component: Service
         },
         {
-            path: '/:lang(en|am|ru)/products/:category(phones|computers|tablets|accessories|smart_watches)' +
-                  '/:manufacturer(apple|samsung|lenovo|huawei_honor|microsoft)?',
+            path: '/:lang(en|am|ru)/products/:category(phones|computers|tablets|accessories|smartWatches)',
             name: 'product',
             component: Product,
             children: [

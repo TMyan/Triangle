@@ -18,8 +18,7 @@ class CreateNavigationTable extends Migration
             $table->string('name_en');
             $table->string('name_am');
             $table->string('name_ru');
-            $table->integer('sub_level_one_id')->default(0);
-            $table->integer('sub_level_two_id')->default(0);
+            $table->integer('sub_id')->default(0);
             $table->string('alias');
             $table->timestamps();
         });
