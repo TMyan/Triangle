@@ -54,7 +54,8 @@ class ProductController extends Controller
 
         if (! $request->has('options')) {
             $count = $this->table->count();
-            $productsData = $this->table->select('id', 'model', 'price', 'are_available', 'status', 'likes', 'dislikes', 'photo')->take($take)->get();
+            $productsData = $this->table->select('id', 'model', 'price', 'are_available', 'status', 'likes', 'dislikes', 'photo')
+                                        ->take($take)->get();
             $filters = $this->filters();
             return response()->json(['data' => $productsData, 'filters' => $filters, 'count' => $count]);
         } else {
@@ -79,7 +80,7 @@ class ProductController extends Controller
                     $count = $this->table->count();
                 }
                 $productsData = $this->table->select('id', 'model', 'price', 'are_available', 'status', 'likes', 'dislikes', 'photo')
-                    ->skip($skip * ($page - 1))->take($take)->get();
+                                            ->skip($skip * ($page - 1))->take($take)->get();
             }
 
             return response()->json(['data' => $productsData, 'count' => $count]);

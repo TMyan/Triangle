@@ -2,13 +2,9 @@
     <div class="product-slider">
         <div class="hv">First</div>
         <i class="btn-left ion-chevron-left hv"></i>
-        <ul>
-            <li class="p-page hv">1</li>
-            <li class="p-page hv">2</li>
-            <li class="p-page hv">3</li>
-            <li class="p-page hv">4</li>
-            <li class="p-page hv">5</li>
-            <li class="p-page">...</li>
+        <ul ref="slider">
+            <li v-for="n in liCount" class="p-page hv" :class="{active: n===activePage}" @click="productData(n)">{{n}}</li>
+            <li v-if="((activePage !== pageCount) && (pageCount > 5))" class="p-page">...</li>
         </ul>
         <i class="btn-right ion-chevron-right hv"></i>
         <div class="hv">Last</div>
@@ -17,7 +13,44 @@
 
 <script>
     export default {
-        name: "slider"
+        name: "slider",
+        data () {
+            return {
+
+            }
+        },
+        props: {
+            count: Number,
+            activePage: Number
+        },
+        computed: {
+            pageCount: function () {
+                return Math.ceil((this.count)/6);
+            },
+            liCount : function () {
+                return (this.pageCount < 5) ? this.pageCount : 5;
+            }
+        },
+        methods: {
+            first () {
+
+            },
+            last () {
+
+            },
+            next () {
+
+            },
+            back () {
+
+            },
+            productData (page) {
+               if (this.activePage !== page) {
+                   this.$emit('page', page);
+               }
+            }
+        }
+
     }
 </script>
 
@@ -58,6 +91,10 @@
 
     .btn-right {
         padding-right: .5rem;
+    }
+
+    .active {
+        color: white;
     }
 
 </style>

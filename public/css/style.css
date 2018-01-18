@@ -465,6 +465,8 @@ html {
 
 .filters {
 	padding-bottom: 5rem;
+    overflow: scroll;
+    max-height: 59rem;
 }
 
 

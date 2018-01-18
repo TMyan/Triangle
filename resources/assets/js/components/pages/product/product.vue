@@ -21,27 +21,30 @@
               </div>
             <div class="col-md-9 p-block">
                 <spinner v-if="spinnerProduct" size="medium" message="Loading..." line-fg-color="#000000"></spinner>
-                <div v-if="loadProduct" class="row">
-                    <div v-for="product in response.data" class="col-lg-4 col-md-6 col-sm-6  product-elem">
-                        <div class="p-photo" :style="{backgroundImage: 'url(../images/products/' + product.photo + ')'}"></div>
-                        <div class="p-status">{{product.status}}</div>
-                        <div class="p-title">{{product.model}}</div>
-                        <div class="p-price">
-                            <strong>Price.</strong>
-                            <span>{{product.price}}$</span>
-                        </div>
-                        <div class="p-cart">
-                            <span>add</span>
-                            <span><i class="ion-android-cart"></i></span>
-                        </div>
-                        <div class="p-option">
-                            <span class="p-more">More</span>
-                        </div>
-                        <div class="p-vote">
-                            <span class="p-like ion-thumbsup"><sub>{{product.likes}}</sub></span>
-                            <span class="p-notLike ion-thumbsdown"><sub>{{product.dislikes}}</sub></span>
+                <div v-if="loadProduct">
+                    <div class="row">
+                        <div v-for="product in response.data" class="col-lg-4 col-md-6 col-sm-6  product-elem">
+                            <div class="p-photo" :style="{backgroundImage: 'url(/../images/products/' + product.photo + ')'}"></div>
+                            <div class="p-status">{{product.status}}</div>
+                            <div class="p-title">{{product.model}}</div>
+                            <div class="p-price">
+                                <strong>Price.</strong>
+                                <span>{{product.price}}$</span>
+                            </div>
+                            <div class="p-cart">
+                                <span>add</span>
+                                <span><i class="ion-android-cart"></i></span>
+                            </div>
+                            <div class="p-option">
+                                <span class="p-more">More</span>
+                            </div>
+                            <div class="p-vote">
+                                <span class="p-like ion-thumbsup"><sub>{{product.likes}}</sub></span>
+                                <span class="p-notLike ion-thumbsdown"><sub>{{product.dislikes}}</sub></span>
+                            </div>
                         </div>
                     </div>
+                    <slider v-if="response.count" :count="response.count" :activePage="activePageNumber" @page="page"></slider>
                 </div>
             </div>
         </div>
@@ -50,16 +53,18 @@
 
 <script>
     import Spinner from 'vue-simple-spinner'
+    import Slider from './slider'
     export default {
         name: "product",
         components: {
-          Spinner
+          Spinner,
+          Slider
         },
         data () {
             return {
                 options: {
-                        page: 1,
-                        count: true,
+                        count: false,
+                        page: undefined,
                         filter: undefined
                 },
                 response: {
@@ -67,6 +72,7 @@
                     filters: {},
                     count: undefined
                 },
+                activePageNumber: 1,
                 spinnerPage: true,
                 spinnerProduct: true,
                 loadPage: false,
@@ -75,6 +81,24 @@
             }
         },
         methods: {
+          resetData () {
+             this.options = {
+                 count: false,
+                 page: undefined,
+                 filter: undefined
+             };
+             this.response = {
+                 data: {},
+                 filters: {},
+                 count: undefined
+             };
+              this.activePageNumber = 1;
+              this.spinnerPage = true;
+              this.spinnerProduct = true;
+              this.loadPage = false;
+              this.loadProduct = false;
+              this.filters = [];
+          },
           category () {
               axios.post(this.$route.path)
                   .then(response => {
@@ -111,13 +135,16 @@
                       request.options[option] = options[option];
                   }
               }
+              if (! this.options.page) {
+                  this.activePageNumber = 1;
+              }
 
               axios.post(this.$route.path, request)
                    .then(response => {
                       this.loadProduct = true;
                       this.spinnerProduct = false;
                       this.response.data = response.data.data;
-                      if (response.data.count) {
+                      if (response.data.count !== null) {
                           this.response.count = response.data.count;
                       }
                    })
@@ -127,7 +154,12 @@
                    });
 
           },
-
+          page (e) {
+             this.options.page = e;
+             this.activePageNumber = e;
+             this.requestData();
+             this.options.page = undefined;
+          },
           productFilter (filter, event) {
               this.active(event);
               let filters = this.filters;
@@ -137,7 +169,7 @@
               for (let i = 0; i < filters.length; i++) {
                   if (filters[i][0] === filter[0]) {
                       let elems = filters[i][2];
-                      let stat1 = false
+                      let stat1 = false;
                       for (let j = 0; j < elems.length; j++) {
                           if (elems[j] === filter[2]) {
                               elems.splice(j, 1);
@@ -181,6 +213,7 @@
               }
 
               this.requestData();
+              this.options.count = false;
           }
         },
         created () {
@@ -189,6 +222,7 @@
         watch: {
             '$route': function () {
               this.loadProduct = false;
+              this.resetData();
               this.category();
             }
         },
