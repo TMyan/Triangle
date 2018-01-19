@@ -1,13 +1,13 @@
 <template>
     <div class="product-slider">
-        <div class="hv">First</div>
-        <i class="btn-left ion-chevron-left hv"></i>
+        <div class="hv" @click="first">First</div>
+        <i class="btn-left ion-chevron-left hv" @click="backP"></i>
         <ul ref="slider">
-            <li v-for="n in liCount" class="p-page hv" :class="{active: n===activePage}" @click="productData(n)">{{n}}</li>
-            <li v-if="((activePage !== pageCount) && (pageCount > 5))" class="p-page">...</li>
+            <li v-for="n in liCount" class="p-page hv" :class="{active: page===skipTk+n}" @click="pageData(skipTk+n, skipTk)">{{skipTk+n}}</li>
+            <li v-if="(pageCount-skipTk) > 5" class="p-page">...</li>
         </ul>
-        <i class="btn-right ion-chevron-right hv"></i>
-        <div class="hv">Last</div>
+        <i class="btn-right ion-chevron-right hv" @click="nextP"></i>
+        <div class="hv" @click="last">Last</div>
     </div>
 </template>
 
@@ -16,41 +16,58 @@
         name: "slider",
         data () {
             return {
-
+               skipTk: this.skip
             }
         },
         props: {
             count: Number,
-            activePage: Number
+            page: Number,
+            skip: Number
         },
         computed: {
             pageCount: function () {
-                return Math.ceil((this.count)/6);
+                return Math.ceil(this.count/6);
             },
-            liCount : function () {
-                return (this.pageCount < 5) ? this.pageCount : 5;
+            liCount: function () {
+                let item = this.pageCount - this.skipTk;
+                if (item < 5) {
+                    return item;
+                } else {
+                    return 5;
+                }
             }
         },
         methods: {
+            nextP () {
+                if (this.pageCount - this.skipTk  > 5 ){
+                    this.skipTk += 5;
+                }
+            },
+            backP () {
+                if (this.skipTk > 0){
+                    this.skipTk -= 5;
+                }
+            },
             first () {
-
+                if (this.page !== 1) {
+                    this.pageData(1,0);
+                }
             },
             last () {
-
-            },
-            next () {
-
-            },
-            back () {
-
-            },
-            productData (page) {
-               if (this.activePage !== page) {
-                   this.$emit('page', page);
+               if (this.page !== this.pageCount) {
+                   let mul = Math.floor(this.pageCount/5);
+                   this.pageData(this.pageCount, mul * 5);
                }
+            },
+            pageData (page, skip) {
+                if (this.page !== page) {
+                    this.$emit('page', page,skip);
+                }
             }
-        }
+        },
+        created () {
 
+        }
     }
 </script>
 

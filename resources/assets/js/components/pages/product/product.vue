@@ -20,7 +20,9 @@
                    </div>
               </div>
             <div class="col-md-9 p-block">
-                <spinner v-if="spinnerProduct" size="medium" message="Loading..." line-fg-color="#000000"></spinner>
+                <div v-if="spinnerProduct" class="sr">
+                    <spinner size="big" class="sf" message="Loading..." line-fg-color="#000000"></spinner>
+                </div>
                 <div v-if="loadProduct">
                     <div class="row">
                         <div v-for="product in response.data" class="col-lg-4 col-md-6 col-sm-6  product-elem">
@@ -44,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                    <slider v-if="response.count" :count="response.count" :activePage="activePageNumber" @page="page"></slider>
+                    <slider v-if="response.count" :count="response.count" :page="slider.activePage" :skip="slider.skipSlider" @page="page"></slider>
                 </div>
             </div>
         </div>
@@ -72,7 +74,10 @@
                     filters: {},
                     count: undefined
                 },
-                activePageNumber: 1,
+                slider: {
+                    activePage: 1,
+                    skipSlider: 0
+                },
                 spinnerPage: true,
                 spinnerProduct: true,
                 loadPage: false,
@@ -92,12 +97,15 @@
                  filters: {},
                  count: undefined
              };
-              this.activePageNumber = 1;
-              this.spinnerPage = true;
-              this.spinnerProduct = true;
-              this.loadPage = false;
-              this.loadProduct = false;
-              this.filters = [];
+             this.slider = {
+                  activePage: 1,
+                  skipSlider: 0
+             };
+             this.spinnerPage = true;
+             this.spinnerProduct = true;
+             this.loadPage = false;
+             this.loadProduct = false;
+             this.filters = [];
           },
           category () {
               axios.post(this.$route.path)
@@ -136,7 +144,7 @@
                   }
               }
               if (! this.options.page) {
-                  this.activePageNumber = 1;
+                  this.slider.activePage = 1;
               }
 
               axios.post(this.$route.path, request)
@@ -154,9 +162,10 @@
                    });
 
           },
-          page (e) {
-             this.options.page = e;
-             this.activePageNumber = e;
+          page (page, skip) {
+             this.options.page = page;
+             this.slider.activePage = page;
+             this.slider.skipSlider = skip;
              this.requestData();
              this.options.page = undefined;
           },
@@ -231,5 +240,12 @@
 </script>
 
 <style scoped>
-
+  .sr {
+      width: 100%;
+      height: 7rem;
+      padding-left: 40%;
+  }
+  .sf {
+      position: fixed;
+  }
 </style>

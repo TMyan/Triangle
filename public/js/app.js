@@ -49994,7 +49994,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.sr[data-v-611c49ba] {\n    width: 100%;\n    height: 7rem;\n    padding-left: 40%;\n}\n.sf[data-v-611c49ba] {\n    position: fixed;\n}\n", ""]);
 
 // exports
 
@@ -50009,6 +50009,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_simple_spinner___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_simple_spinner__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__slider__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__slider___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__slider__);
+//
+//
 //
 //
 //
@@ -50083,7 +50085,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 filters: {},
                 count: undefined
             },
-            activePageNumber: 1,
+            slider: {
+                activePage: 1,
+                skipSlider: 0
+            },
             spinnerPage: true,
             spinnerProduct: true,
             loadPage: false,
@@ -50104,7 +50109,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 filters: {},
                 count: undefined
             };
-            this.activePageNumber = 1;
+            this.slider = {
+                activePage: 1,
+                skipSlider: 0
+            };
             this.spinnerPage = true;
             this.spinnerProduct = true;
             this.loadPage = false;
@@ -50148,7 +50156,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }
             if (!this.options.page) {
-                this.activePageNumber = 1;
+                this.slider.activePage = 1;
             }
 
             axios.post(this.$route.path, request).then(function (response) {
@@ -50163,9 +50171,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(response);
             });
         },
-        page: function page(e) {
-            this.options.page = e;
-            this.activePageNumber = e;
+        page: function page(_page, skip) {
+            this.options.page = _page;
+            this.slider.activePage = _page;
+            this.slider.skipSlider = skip;
             this.requestData();
             this.options.page = undefined;
         },
@@ -50354,33 +50363,58 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "slider",
     data: function data() {
-        return {};
+        return {
+            skipTk: this.skip
+        };
     },
 
     props: {
         count: Number,
-        activePage: Number
+        page: Number,
+        skip: Number
     },
     computed: {
         pageCount: function pageCount() {
             return Math.ceil(this.count / 6);
         },
         liCount: function liCount() {
-            return this.pageCount < 5 ? this.pageCount : 5;
+            var item = this.pageCount - this.skipTk;
+            if (item < 5) {
+                return item;
+            } else {
+                return 5;
+            }
         }
     },
     methods: {
-        first: function first() {},
-        last: function last() {},
-        next: function next() {},
-        back: function back() {},
-        productData: function productData(page) {
-            if (this.activePage !== page) {
-                this.$emit('page', page);
+        nextP: function nextP() {
+            if (this.pageCount - this.skipTk > 5) {
+                this.skipTk += 5;
+            }
+        },
+        backP: function backP() {
+            if (this.skipTk > 0) {
+                this.skipTk -= 5;
+            }
+        },
+        first: function first() {
+            if (this.page !== 1) {
+                this.pageData(1, 0);
+            }
+        },
+        last: function last() {
+            if (this.page !== this.pageCount) {
+                var mul = Math.floor(this.pageCount / 5);
+                this.pageData(this.pageCount, mul * 5);
+            }
+        },
+        pageData: function pageData(page, skip) {
+            if (this.page !== page) {
+                this.$emit('page', page, skip);
             }
         }
-    }
-
+    },
+    created: function created() {}
 });
 
 /***/ }),
@@ -50392,9 +50426,14 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "product-slider" }, [
-    _c("div", { staticClass: "hv" }, [_vm._v("First")]),
+    _c("div", { staticClass: "hv", on: { click: _vm.first } }, [
+      _vm._v("First")
+    ]),
     _vm._v(" "),
-    _c("i", { staticClass: "btn-left ion-chevron-left hv" }),
+    _c("i", {
+      staticClass: "btn-left ion-chevron-left hv",
+      on: { click: _vm.backP }
+    }),
     _vm._v(" "),
     _c(
       "ul",
@@ -50405,27 +50444,30 @@ var render = function() {
             "li",
             {
               staticClass: "p-page hv",
-              class: { active: n === _vm.activePage },
+              class: { active: _vm.page === _vm.skipTk + n },
               on: {
                 click: function($event) {
-                  _vm.productData(n)
+                  _vm.pageData(_vm.skipTk + n, _vm.skipTk)
                 }
               }
             },
-            [_vm._v(_vm._s(n))]
+            [_vm._v(_vm._s(_vm.skipTk + n))]
           )
         }),
         _vm._v(" "),
-        _vm.activePage !== _vm.pageCount && _vm.pageCount > 5
+        _vm.pageCount - _vm.skipTk > 5
           ? _c("li", { staticClass: "p-page" }, [_vm._v("...")])
           : _vm._e()
       ],
       2
     ),
     _vm._v(" "),
-    _c("i", { staticClass: "btn-right ion-chevron-right hv" }),
+    _c("i", {
+      staticClass: "btn-right ion-chevron-right hv",
+      on: { click: _vm.nextP }
+    }),
     _vm._v(" "),
-    _c("div", { staticClass: "hv" }, [_vm._v("Last")])
+    _c("div", { staticClass: "hv", on: { click: _vm.last } }, [_vm._v("Last")])
   ])
 }
 var staticRenderFns = []
@@ -50514,103 +50556,107 @@ var render = function() {
               2
             ),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-md-9 p-block" },
-              [
-                _vm.spinnerProduct
-                  ? _c("spinner", {
-                      attrs: {
-                        size: "medium",
-                        message: "Loading...",
-                        "line-fg-color": "#000000"
-                      }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.loadProduct
-                  ? _c(
-                      "div",
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "row" },
-                          _vm._l(_vm.response.data, function(product) {
-                            return _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "col-lg-4 col-md-6 col-sm-6  product-elem"
-                              },
-                              [
-                                _c("div", {
-                                  staticClass: "p-photo",
-                                  style: {
-                                    backgroundImage:
-                                      "url(/../images/products/" +
-                                      product.photo +
-                                      ")"
-                                  }
-                                }),
+            _c("div", { staticClass: "col-md-9 p-block" }, [
+              _vm.spinnerProduct
+                ? _c(
+                    "div",
+                    { staticClass: "sr" },
+                    [
+                      _c("spinner", {
+                        staticClass: "sf",
+                        attrs: {
+                          size: "big",
+                          message: "Loading...",
+                          "line-fg-color": "#000000"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.loadProduct
+                ? _c(
+                    "div",
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "row" },
+                        _vm._l(_vm.response.data, function(product) {
+                          return _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col-lg-4 col-md-6 col-sm-6  product-elem"
+                            },
+                            [
+                              _c("div", {
+                                staticClass: "p-photo",
+                                style: {
+                                  backgroundImage:
+                                    "url(/../images/products/" +
+                                    product.photo +
+                                    ")"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "p-status" }, [
+                                _vm._v(_vm._s(product.status))
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "p-title" }, [
+                                _vm._v(_vm._s(product.model))
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "p-price" }, [
+                                _c("strong", [_vm._v("Price.")]),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "p-status" }, [
-                                  _vm._v(_vm._s(product.status))
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "p-title" }, [
-                                  _vm._v(_vm._s(product.model))
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "p-price" }, [
-                                  _c("strong", [_vm._v("Price.")]),
-                                  _vm._v(" "),
-                                  _c("span", [
-                                    _vm._v(_vm._s(product.price) + "$")
-                                  ])
-                                ]),
-                                _vm._v(" "),
-                                _vm._m(1, true),
-                                _vm._v(" "),
-                                _vm._m(2, true),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "p-vote" }, [
-                                  _c(
-                                    "span",
-                                    { staticClass: "p-like ion-thumbsup" },
-                                    [_c("sub", [_vm._v(_vm._s(product.likes))])]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "span",
-                                    { staticClass: "p-notLike ion-thumbsdown" },
-                                    [
-                                      _c("sub", [
-                                        _vm._v(_vm._s(product.dislikes))
-                                      ])
-                                    ]
-                                  )
+                                _c("span", [
+                                  _vm._v(_vm._s(product.price) + "$")
                                 ])
-                              ]
-                            )
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(1, true),
+                              _vm._v(" "),
+                              _vm._m(2, true),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "p-vote" }, [
+                                _c(
+                                  "span",
+                                  { staticClass: "p-like ion-thumbsup" },
+                                  [_c("sub", [_vm._v(_vm._s(product.likes))])]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  { staticClass: "p-notLike ion-thumbsdown" },
+                                  [
+                                    _c("sub", [
+                                      _vm._v(_vm._s(product.dislikes))
+                                    ])
+                                  ]
+                                )
+                              ])
+                            ]
+                          )
+                        })
+                      ),
+                      _vm._v(" "),
+                      _vm.response.count
+                        ? _c("slider", {
+                            attrs: {
+                              count: _vm.response.count,
+                              page: _vm.slider.activePage,
+                              skip: _vm.slider.skipSlider
+                            },
+                            on: { page: _vm.page }
                           })
-                        ),
-                        _vm._v(" "),
-                        _vm.response.count
-                          ? _c("slider", {
-                              attrs: {
-                                count: _vm.response.count,
-                                activePage: _vm.activePageNumber
-                              },
-                              on: { page: _vm.page }
-                            })
-                          : _vm._e()
-                      ],
-                      1
-                    )
-                  : _vm._e()
-              ],
-              1
-            )
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ])
           ])
         : _vm._e()
     ],
