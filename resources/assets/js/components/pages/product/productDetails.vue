@@ -4,7 +4,15 @@
       <div v-if="loadProduct">
          <div class="row">
             <div class="col-lg-7">
-               <div class="p-slide"></div>
+               <div class="p-slide">
+                  <div id="example">
+                     <carousel-3d :perspective="0" :space="400" :display="3">
+                        <slide v-for="(photo, i) in response.photos" :index="i">
+                           <div class="sde" :style="{backgroundImage: 'url(/../images/products/' + photo + ')'}"></div>
+                        </slide>
+                     </carousel-3d>
+                  </div>
+               </div>
             </div>
             <div class="col-lg-5">
                <div class="basic-block">
@@ -76,6 +84,19 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+   .carousel-3d-container {
+      .carousel-3d-slide {
+         padding: 20px;
 
+      .title { font-size: 22px; }
+      }
+   }
+
+   .sde {
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      height: 100%;
+   }
 </style>

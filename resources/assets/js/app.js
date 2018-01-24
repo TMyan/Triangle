@@ -19,7 +19,10 @@ import App from './components/App'
 import router from './router/index'
 import store from './vuex/store'
 import VeeValidate from 'vee-validate'
+import Carousel3d from 'vue-carousel-3d';
 
+
+Vue.use(Carousel3d);
 Vue.use(VeeValidate);
 const app = new Vue({
     el: '#app',
