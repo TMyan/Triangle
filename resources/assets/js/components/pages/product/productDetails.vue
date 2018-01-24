@@ -7,7 +7,7 @@
                <div class="p-slide">
                   <div id="example">
                      <carousel-3d :perspective="0" :space="400" :display="3">
-                        <slide v-for="(photo, i) in response.photos" :index="i">
+                        <slide v-for="(photo, i) in response.photos" :index="i" :key="i">
                            <div class="sde" :style="{backgroundImage: 'url(/../images/products/' + photo + ')'}"></div>
                         </slide>
                      </carousel-3d>
@@ -18,9 +18,12 @@
                <div class="basic-block">
                   <div class="basic-p">
                      <p v-for="(base, key) in response.basic">{{key}}-{{base}}</p>
-                     <div class="add-cart-btn">
-                        <span>Add to</span>
-                        <span><i class="ion-android-cart"></i></span>
+                     <div>
+                        <div class="add-cart-btn">
+                           <span>Add to</span>
+                           <span><i class="ion-android-cart"></i></span>
+                        </div>
+                        <div class="medium-block-btn" :class="{sta: moreOptions}" @click="more">More</div>
                      </div>
                   </div>
                </div>
@@ -28,9 +31,8 @@
          </div>
          <div class="row">
             <div class="col-lg-7 medium-block">
-               <div class="medium-block-btn">More</div>
-               <div class="med-option">
-                  <div v-for="(group, key) in response.more" class="med-group">
+               <div v-show="moreOptions" class="med-option">
+                  <div v-for="(group, key) in response.all" class="med-group">
                      <div class="gr">{{key}}</div>
                      <div class="med-gop">
                         <table class="med-table">
@@ -59,16 +61,20 @@
             return {
                 spinner: true,
                 loadProduct: false,
+                moreOptions: false,
                 response: {}
             }
         },
         methods: {
-          hideProducts (status) {
-              this.$emit('product', status);
+          more () {
+              if (this.moreOptions) {
+                  this.moreOptions = false;
+              } else {
+                  this.moreOptions = true;
+              }
           }
         },
         created () {
-            this.hideProducts(true);
             axios.post(this.$route.path)
                 .then(response => {
                     this.response = response.data;
@@ -98,5 +104,9 @@
       background-position: center;
       background-size: cover;
       height: 100%;
+   }
+
+   .sta {
+      background-color: #39ec57;
    }
 </style>

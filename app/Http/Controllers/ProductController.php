@@ -45,7 +45,7 @@ class ProductController extends Controller
         $optionsBasic = json_decode($productData->optionsBasic);
         $optionsAll = json_decode($productData->optionsAll);
         $photos = json_decode($productData->photos);
-        return response()->json(['basic' => $optionsBasic, 'more' => $optionsAll, 'photos' => $photos]);
+        return response()->json(['basic' => $optionsBasic, 'all' => $optionsAll, 'photos' => $photos]);
     }
 
 

@@ -604,7 +604,7 @@ html {
 
 .basic-block {
    padding-left: 1rem;
-   padding-top: 2rem;
+   padding-top: 1.2rem;
 }
 
 .basic-block p {
@@ -626,6 +626,7 @@ html {
 	width: 6rem;
     height: 2rem;
     text-align: center;
+    display: inline-block;
     background-color: #fffafac2;
     padding-top: 3px;
     border-radius: 3px;
@@ -637,19 +638,34 @@ html {
 	background-color: #50bb62a3;
 }
 
+.add-cart-btn:active {
+   background-color: #39ec57a3;
+}
+
+.medium-block-btn:hover {
+    background-color: #50bb62a3;
+}
+
+.medium-block-btn:active {
+    background-color: #39ec57a3;
+}
+
 .medium-block {
 	margin-top: 3rem;
 	margin-bottom: 3rem;
 }
 
 .medium-block-btn {
-	width: 4.4rem;
+	width: 6rem;
     height: 2rem;
+    float: right;
+    margin-top: 1rem;
+    margin-right: 1rem;
     background-color: #fffafac2;
     border-radius: 3px;
     text-align: center;
     line-height: 2rem;
-    color: black;
+    color: #4c4c4c;
 }
 
 .med-option {

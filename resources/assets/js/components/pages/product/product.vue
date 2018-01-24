@@ -1,7 +1,7 @@
 <template>
     <div class="product container" id="product">
         <spinner v-if="spinnerPage" size="big" message="Loading..." line-fg-color="#000000"></spinner>
-        <div v-if="loadPage" class="row">
+        <div v-if="loadPage" :class="{hide: $route.params.product}" class="row">
               <div class="col-md-3 filters">
                    <h5>Filters</h5>
                    <div v-for="filter in response.filters" class="filter">
@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <router-view @product="pageStatus"></router-view>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -80,6 +80,7 @@
                     skipSlider: 0
                 },
                 spinnerPage: true,
+                visited: false,
                 spinnerProduct: true,
                 categoryPath: undefined,
                 loadPage: false,
@@ -88,9 +89,6 @@
             }
         },
         methods: {
-          pageStatus (condition) {
-              this.loadPage =  condition ? false : true;
-          },
           resetData () {
              this.options = {
                  count: false,
@@ -235,8 +233,13 @@
           }
         },
         created () {
-            this.categoryPath = this.$route.path;
-            this.category(this.$route.path);
+            if (this.$route.params.product) {
+                this.spinnerPage = false;
+            } else {
+                this.visited = true;
+                this.categoryPath = this.$route.path;
+                this.category(this.$route.path);
+            }
         },
         beforeRouteUpdate (to, from, next) {
             if (to.params.category !== from.params.category){
@@ -244,6 +247,12 @@
                 this.resetData();
                 this.category(to.path);
                 this.categoryPath = to.path;
+            } else {
+                if (! this.visited) {
+                    this.visited = true;
+                    this.spinnerPage = true;
+                    this.category(to.path);
+                }
             }
             next();
         },
@@ -267,5 +276,9 @@
 
   .nta {
       color: gray;
+  }
+
+  .hide {
+      display: none;
   }
 </style>

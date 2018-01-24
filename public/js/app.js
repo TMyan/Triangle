@@ -50001,7 +50001,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n.sr[data-v-611c49ba] {\n    width: 100%;\n    height: 7rem;\n    padding-left: 40%;\n}\n.sf[data-v-611c49ba] {\n    position: fixed;\n}\n.nta[data-v-611c49ba]:hover {\n    text-decoration: none;\n}\n.nta[data-v-611c49ba] {\n    color: gray;\n}\n", ""]);
+exports.push([module.i, "\n.sr[data-v-611c49ba] {\n    width: 100%;\n    height: 7rem;\n    padding-left: 40%;\n}\n.sf[data-v-611c49ba] {\n    position: fixed;\n}\n.nta[data-v-611c49ba]:hover {\n    text-decoration: none;\n}\n.nta[data-v-611c49ba] {\n    color: gray;\n}\n.hide[data-v-611c49ba] {\n    display: none;\n}\n", ""]);
 
 // exports
 
@@ -50098,6 +50098,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 skipSlider: 0
             },
             spinnerPage: true,
+            visited: false,
             spinnerProduct: true,
             categoryPath: undefined,
             loadPage: false,
@@ -50107,9 +50108,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        pageStatus: function pageStatus(condition) {
-            this.loadPage = condition ? false : true;
-        },
         resetData: function resetData() {
             this.options = {
                 count: false,
@@ -50251,8 +50249,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
-        this.categoryPath = this.$route.path;
-        this.category(this.$route.path);
+        if (this.$route.params.product) {
+            this.spinnerPage = false;
+        } else {
+            this.visited = true;
+            this.categoryPath = this.$route.path;
+            this.category(this.$route.path);
+        }
     },
     beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
         if (to.params.category !== from.params.category) {
@@ -50260,6 +50263,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.resetData();
             this.category(to.path);
             this.categoryPath = to.path;
+        } else {
+            if (!this.visited) {
+                this.visited = true;
+                this.spinnerPage = true;
+                this.category(to.path);
+            }
         }
         next();
     }
@@ -50524,187 +50533,191 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm.loadPage
-        ? _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              { staticClass: "col-md-3 filters" },
-              [
-                _c("h5", [_vm._v("Filters")]),
-                _vm._v(" "),
-                _vm._l(_vm.response.filters, function(filter) {
-                  return _c("div", { staticClass: "filter" }, [
-                    _c("div", { staticClass: "f-par" }, [
-                      _c("span", [_vm._v(_vm._s(filter.name))]),
+        ? _c(
+            "div",
+            { staticClass: "row", class: { hide: _vm.$route.params.product } },
+            [
+              _c(
+                "div",
+                { staticClass: "col-md-3 filters" },
+                [
+                  _c("h5", [_vm._v("Filters")]),
+                  _vm._v(" "),
+                  _vm._l(_vm.response.filters, function(filter) {
+                    return _c("div", { staticClass: "filter" }, [
+                      _c("div", { staticClass: "f-par" }, [
+                        _c("span", [_vm._v(_vm._s(filter.name))]),
+                        _vm._v(" "),
+                        _vm._m(0, true)
+                      ]),
                       _vm._v(" "),
-                      _vm._m(0, true)
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      _vm._l(filter.data.filter, function(value, index) {
-                        return _c("div", [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "wMax",
-                              on: {
-                                click: function($event) {
-                                  _vm.productFilter(
-                                    [
-                                      filter.data.column,
-                                      filter.data.condition,
-                                      filter.data.values[index]
-                                    ],
-                                    $event
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c("div", { staticClass: "fcp" }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "fnp" }, [
-                                _vm._v(_vm._s(value))
-                              ])
-                            ]
-                          )
-                        ])
-                      })
-                    )
-                  ])
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-9 p-block" }, [
-              _vm.spinnerProduct
-                ? _c(
-                    "div",
-                    { staticClass: "sr" },
-                    [
-                      _c("spinner", {
-                        staticClass: "sf",
-                        attrs: {
-                          size: "big",
-                          message: "Loading...",
-                          "line-fg-color": "#000000"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.loadProduct
-                ? _c(
-                    "div",
-                    [
                       _c(
                         "div",
-                        { staticClass: "row" },
-                        _vm._l(_vm.response.data, function(product) {
-                          return _c(
-                            "div",
-                            {
-                              staticClass:
-                                "col-lg-4 col-md-6 col-sm-6  product-elem"
-                            },
-                            [
-                              _c("div", {
-                                staticClass: "p-photo",
-                                style: {
-                                  backgroundImage:
-                                    "url(/../images/products/" +
-                                    product.photo +
-                                    ")"
+                        _vm._l(filter.data.filter, function(value, index) {
+                          return _c("div", [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "wMax",
+                                on: {
+                                  click: function($event) {
+                                    _vm.productFilter(
+                                      [
+                                        filter.data.column,
+                                        filter.data.condition,
+                                        filter.data.values[index]
+                                      ],
+                                      $event
+                                    )
+                                  }
                                 }
-                              }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "p-status" }, [
-                                _vm._v(_vm._s(product.status))
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "p-title" }, [
-                                _vm._v(_vm._s(product.model))
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "p-price" }, [
-                                _c("strong", [_vm._v("Price.")]),
+                              },
+                              [
+                                _c("div", { staticClass: "fcp" }),
                                 _vm._v(" "),
-                                _c("span", [
-                                  _vm._v(_vm._s(product.price) + "$")
+                                _c("div", { staticClass: "fnp" }, [
+                                  _vm._v(_vm._s(value))
                                 ])
-                              ]),
-                              _vm._v(" "),
-                              _vm._m(1, true),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "p-option" },
-                                [
+                              ]
+                            )
+                          ])
+                        })
+                      )
+                    ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-9 p-block" }, [
+                _vm.spinnerProduct
+                  ? _c(
+                      "div",
+                      { staticClass: "sr" },
+                      [
+                        _c("spinner", {
+                          staticClass: "sf",
+                          attrs: {
+                            size: "big",
+                            message: "Loading...",
+                            "line-fg-color": "#000000"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.loadProduct
+                  ? _c(
+                      "div",
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "row" },
+                          _vm._l(_vm.response.data, function(product) {
+                            return _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "col-lg-4 col-md-6 col-sm-6  product-elem"
+                              },
+                              [
+                                _c("div", {
+                                  staticClass: "p-photo",
+                                  style: {
+                                    backgroundImage:
+                                      "url(/../images/products/" +
+                                      product.photo +
+                                      ")"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "p-status" }, [
+                                  _vm._v(_vm._s(product.status))
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "p-title" }, [
+                                  _vm._v(_vm._s(product.model))
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "p-price" }, [
+                                  _c("strong", [_vm._v("Price.")]),
+                                  _vm._v(" "),
+                                  _c("span", [
+                                    _vm._v(_vm._s(product.price) + "$")
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _vm._m(1, true),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "p-option" },
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass: "nta",
+                                        attrs: {
+                                          to:
+                                            _vm.categoryPath +
+                                            "/product_" +
+                                            product.id
+                                        }
+                                      },
+                                      [
+                                        _c("span", { staticClass: "p-more" }, [
+                                          _vm._v("More")
+                                        ])
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "p-vote" }, [
                                   _c(
-                                    "router-link",
-                                    {
-                                      staticClass: "nta",
-                                      attrs: {
-                                        to:
-                                          _vm.categoryPath +
-                                          "/product_" +
-                                          product.id
-                                      }
-                                    },
+                                    "span",
+                                    { staticClass: "p-like ion-thumbsup" },
+                                    [_c("sub", [_vm._v(_vm._s(product.likes))])]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticClass: "p-notLike ion-thumbsdown" },
                                     [
-                                      _c("span", { staticClass: "p-more" }, [
-                                        _vm._v("More")
+                                      _c("sub", [
+                                        _vm._v(_vm._s(product.dislikes))
                                       ])
                                     ]
                                   )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "p-vote" }, [
-                                _c(
-                                  "span",
-                                  { staticClass: "p-like ion-thumbsup" },
-                                  [_c("sub", [_vm._v(_vm._s(product.likes))])]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "span",
-                                  { staticClass: "p-notLike ion-thumbsdown" },
-                                  [
-                                    _c("sub", [
-                                      _vm._v(_vm._s(product.dislikes))
-                                    ])
-                                  ]
-                                )
-                              ])
-                            ]
-                          )
-                        })
-                      ),
-                      _vm._v(" "),
-                      _vm.response.count
-                        ? _c("slider", {
-                            attrs: {
-                              count: _vm.response.count,
-                              page: _vm.slider.activePage,
-                              skip: _vm.slider.skipSlider
-                            },
-                            on: { page: _vm.page }
+                                ])
+                              ]
+                            )
                           })
-                        : _vm._e()
-                    ],
-                    1
-                  )
-                : _vm._e()
-            ])
-          ])
+                        ),
+                        _vm._v(" "),
+                        _vm.response.count
+                          ? _c("slider", {
+                              attrs: {
+                                count: _vm.response.count,
+                                page: _vm.slider.activePage,
+                                skip: _vm.slider.skipSlider
+                              },
+                              on: { page: _vm.page }
+                            })
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ])
+            ]
+          )
         : _vm._e(),
       _vm._v(" "),
-      _c("router-view", { on: { product: _vm.pageStatus } })
+      _c("router-view")
     ],
     1
   )
@@ -50825,7 +50838,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n.carousel-3d-container .carousel-3d-slide[data-v-7684de62] {\n  padding: 20px;\n}\n.carousel-3d-container .carousel-3d-slide .title[data-v-7684de62] {\n    font-size: 22px;\n}\n.sde[data-v-7684de62] {\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n  height: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.carousel-3d-container .carousel-3d-slide[data-v-7684de62] {\n  padding: 20px;\n}\n.carousel-3d-container .carousel-3d-slide .title[data-v-7684de62] {\n    font-size: 22px;\n}\n.sde[data-v-7684de62] {\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n  height: 100%;\n}\n.sta[data-v-7684de62] {\n  background-color: #39ec57;\n}\n", ""]);
 
 // exports
 
@@ -50888,6 +50901,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -50899,19 +50914,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             spinner: true,
             loadProduct: false,
+            moreOptions: false,
             response: {}
         };
     },
 
     methods: {
-        hideProducts: function hideProducts(status) {
-            this.$emit('product', status);
+        more: function more() {
+            if (this.moreOptions) {
+                this.moreOptions = false;
+            } else {
+                this.moreOptions = true;
+            }
         }
     },
     created: function created() {
         var _this = this;
 
-        this.hideProducts(true);
         axios.post(this.$route.path).then(function (response) {
             _this.response = response.data;
             _this.spinner = false;
@@ -50957,7 +50976,7 @@ var render = function() {
                         "carousel-3d",
                         { attrs: { perspective: 0, space: 400, display: 3 } },
                         _vm._l(_vm.response.photos, function(photo, i) {
-                          return _c("slide", { attrs: { index: i } }, [
+                          return _c("slide", { key: i, attrs: { index: i } }, [
                             _c("div", {
                               staticClass: "sde",
                               style: {
@@ -50986,7 +51005,19 @@ var render = function() {
                         ])
                       }),
                       _vm._v(" "),
-                      _vm._m(0)
+                      _c("div", [
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "medium-block-btn",
+                            class: { sta: _vm.moreOptions },
+                            on: { click: _vm.more }
+                          },
+                          [_vm._v("More")]
+                        )
+                      ])
                     ],
                     2
                   )
@@ -50996,14 +51027,20 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-lg-7 medium-block" }, [
-                _c("div", { staticClass: "medium-block-btn" }, [
-                  _vm._v("More")
-                ]),
-                _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "med-option" },
-                  _vm._l(_vm.response.more, function(group, key) {
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.moreOptions,
+                        expression: "moreOptions"
+                      }
+                    ],
+                    staticClass: "med-option"
+                  },
+                  _vm._l(_vm.response.all, function(group, key) {
                     return _c("div", { staticClass: "med-group" }, [
                       _c("div", { staticClass: "gr" }, [_vm._v(_vm._s(key))]),
                       _vm._v(" "),
