@@ -50,7 +50,7 @@ html {
   .header a {
   	color: #86888a
   }
-  
+
   .header a:hover {
   	color: #ffffff;
   	text-decoration: none;
@@ -136,7 +136,7 @@ html {
     background-position: center;
     margin-top: -1rem;
     height: 8rem;
-   } 
+   }
 
   .active {
   	    border-bottom: 1px solid white;
@@ -365,7 +365,7 @@ html {
   .big-triangle-icon {
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center; 
+    background-position: center;
     width: 100%;
     height: 100%;
   }
@@ -551,21 +551,6 @@ html {
 	padding-bottom: 5rem;
 }
 
-.p-title {
-	height: 3rem;
-	overflow: hidden;
-    margin-top: -1rem;
-}
-
-.p-price {
-	padding-top: 1rem;
-}
-
-.p-price span {
-	padding-left: 1rem;
-	color: #2eda4d;
-}
-
 .p-cart {
 	position: relative;
     left: 70%;
@@ -618,7 +603,6 @@ html {
 
 .basic-block {
    padding-left: 1rem;
-   color: #80c58ca3;
    padding-top: 2rem;
 }
 
@@ -633,15 +617,15 @@ html {
     padding-bottom: 1rem;
     padding-top: 1rem;
     border-radius: 5px;
-    background-color: #969696;
-    color: #000000;
+    background-color: #000000;
+    color: #4c4c4c;
 }
 
 .add-cart-btn {
 	width: 6rem;
     height: 2rem;
     text-align: center;
-    background-color: #80c58ca3;
+    background-color: #fffafac2;
     padding-top: 3px;
     border-radius: 3px;
     margin-top: 1rem;
@@ -660,7 +644,7 @@ html {
 .medium-block-btn {
 	width: 4.4rem;
     height: 2rem;
-    background-color: #84ca90a3;
+    background-color: #fffafac2;
     border-radius: 3px;
     text-align: center;
     line-height: 2rem;
@@ -671,7 +655,7 @@ html {
 	margin-top: 2rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: #969696;
+    background-color: #ffffff;
     border-radius: 3px;
     padding-bottom: 1rem; 
 }
@@ -686,7 +670,7 @@ html {
 
 .gr {
 	padding-top: 1rem;
-	color: #d2ffd2;
+	color: black;
 }
 
 .med-table {
@@ -696,7 +680,7 @@ html {
 
 .mtw1 {
 	width: 25%;
-	background-color: #ceefed;
+	background-color: #2d2f2f;
 	border-bottom: 1px solid;
 	text-align: center;
 	
@@ -704,7 +688,7 @@ html {
 
 .mtw2 {
 	width: 75%;
-	background-color: #a3bfca;;
+	background-color: #000000;
 	border-bottom: 1px solid;
 	padding-left: .5rem;
 
@@ -734,7 +718,7 @@ html {
      .footer .container div {
      	height: 4rem;
      	line-height: 4rem;
-     	
+
      }
 
  /* End Footer */

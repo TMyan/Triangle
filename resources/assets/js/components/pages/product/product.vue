@@ -38,7 +38,7 @@
                                 <span><i class="ion-android-cart"></i></span>
                             </div>
                             <div class="p-option">
-                                <span class="p-more">More</span>
+                               <router-link :to="categoryPath + '/product_' + product.id" class="nta"><span class="p-more">More</span></router-link>
                             </div>
                             <div class="p-vote">
                                 <span class="p-like ion-thumbsup"><sub>{{product.likes}}</sub></span>
@@ -50,6 +50,7 @@
                 </div>
             </div>
         </div>
+        <router-view @product="pageStatus"></router-view>
     </div>
 </template>
 
@@ -80,12 +81,16 @@
                 },
                 spinnerPage: true,
                 spinnerProduct: true,
+                categoryPath: undefined,
                 loadPage: false,
                 loadProduct: false,
                 filters: [],
             }
         },
         methods: {
+          pageStatus (condition) {
+              this.loadPage =  condition ? false : true;
+          },
           resetData () {
              this.options = {
                  count: false,
@@ -107,8 +112,8 @@
              this.loadProduct = false;
              this.filters = [];
           },
-          category () {
-              axios.post(this.$route.path)
+          category (path) {
+              axios.post(path)
                   .then(response => {
                       this.response = response.data;
                       this.loadPage = true;
@@ -171,6 +176,10 @@
           },
           productFilter (filter, event) {
               this.active(event);
+              this.slider = {
+                  activePage: 1,
+                  skipSlider: 0
+              };
               let filters = this.filters;
               let where = [];
               let whereIn = [];
@@ -226,14 +235,17 @@
           }
         },
         created () {
-            this.category();
+            this.categoryPath = this.$route.path;
+            this.category(this.$route.path);
         },
-        watch: {
-            '$route': function () {
-              this.loadProduct = false;
-              this.resetData();
-              this.category();
+        beforeRouteUpdate (to, from, next) {
+            if (to.params.category !== from.params.category){
+                this.loadProduct = false;
+                this.resetData();
+                this.category(to.path);
+                this.categoryPath = to.path;
             }
+            next();
         },
 
     }
@@ -247,5 +259,13 @@
   }
   .sf {
       position: fixed;
+  }
+
+  .nta:hover {
+      text-decoration: none;
+  }
+
+  .nta {
+      color: gray;
   }
 </style>

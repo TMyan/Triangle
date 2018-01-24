@@ -43,6 +43,10 @@ export default new Router ({
                     component: ProductDetails
                 }
             ]
+        },
+        {
+            path: '/:lang(en|am|ru)/products/',
+            redirect: '/:lang(en|am|ru)/products/phones'
         }
     ]
 })

@@ -45043,6 +45043,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
             path: ':product(product_[1-9][0-9]*)',
             component: __WEBPACK_IMPORTED_MODULE_7__components_pages_product_productDetails___default.a
         }]
+    }, {
+        path: '/:lang(en|am|ru)/products/',
+        redirect: '/:lang(en|am|ru)/products/phones'
     }]
 }));
 
@@ -49994,7 +49997,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n.sr[data-v-611c49ba] {\n    width: 100%;\n    height: 7rem;\n    padding-left: 40%;\n}\n.sf[data-v-611c49ba] {\n    position: fixed;\n}\n", ""]);
+exports.push([module.i, "\n.sr[data-v-611c49ba] {\n    width: 100%;\n    height: 7rem;\n    padding-left: 40%;\n}\n.sf[data-v-611c49ba] {\n    position: fixed;\n}\n.nta[data-v-611c49ba]:hover {\n    text-decoration: none;\n}\n.nta[data-v-611c49ba] {\n    color: gray;\n}\n", ""]);
 
 // exports
 
@@ -50009,6 +50012,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_simple_spinner___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_simple_spinner__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__slider__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__slider___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__slider__);
+//
 //
 //
 //
@@ -50091,6 +50095,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             spinnerPage: true,
             spinnerProduct: true,
+            categoryPath: undefined,
             loadPage: false,
             loadProduct: false,
             filters: []
@@ -50098,6 +50103,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        pageStatus: function pageStatus(condition) {
+            this.loadPage = condition ? false : true;
+        },
         resetData: function resetData() {
             this.options = {
                 count: false,
@@ -50119,10 +50127,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.loadProduct = false;
             this.filters = [];
         },
-        category: function category() {
+        category: function category(path) {
             var _this = this;
 
-            axios.post(this.$route.path).then(function (response) {
+            axios.post(path).then(function (response) {
                 _this.response = response.data;
                 _this.loadPage = true;
                 _this.loadProduct = true;
@@ -50180,6 +50188,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         productFilter: function productFilter(filter, event) {
             this.active(event);
+            this.slider = {
+                activePage: 1,
+                skipSlider: 0
+            };
             var filters = this.filters;
             var where = [];
             var whereIn = [];
@@ -50235,17 +50247,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
-        this.category();
+        this.categoryPath = this.$route.path;
+        this.category(this.$route.path);
     },
-
-    watch: {
-        '$route': function $route() {
+    beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
+        if (to.params.category !== from.params.category) {
             this.loadProduct = false;
             this.resetData();
-            this.category();
+            this.category(to.path);
+            this.categoryPath = to.path;
         }
+        next();
     }
-
 });
 
 /***/ }),
@@ -50405,7 +50418,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         last: function last() {
             if (this.page !== this.pageCount) {
                 var mul = Math.floor(this.pageCount / 5);
-                this.pageData(this.pageCount, mul * 5);
+                if (this.pageCount > 5) {
+                    this.pageData(this.pageCount, mul * 5);
+                } else {
+                    this.pageData(this.pageCount, 0);
+                }
             }
         },
         pageData: function pageData(page, skip) {
@@ -50618,7 +50635,30 @@ var render = function() {
                               _vm._v(" "),
                               _vm._m(1, true),
                               _vm._v(" "),
-                              _vm._m(2, true),
+                              _c(
+                                "div",
+                                { staticClass: "p-option" },
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      staticClass: "nta",
+                                      attrs: {
+                                        to:
+                                          _vm.categoryPath +
+                                          "/product_" +
+                                          product.id
+                                      }
+                                    },
+                                    [
+                                      _c("span", { staticClass: "p-more" }, [
+                                        _vm._v("More")
+                                      ])
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
                               _vm._v(" "),
                               _c("div", { staticClass: "p-vote" }, [
                                 _c(
@@ -50658,7 +50698,9 @@ var render = function() {
                 : _vm._e()
             ])
           ])
-        : _vm._e()
+        : _vm._e(),
+      _vm._v(" "),
+      _c("router-view", { on: { product: _vm.pageStatus } })
     ],
     1
   )
@@ -50680,14 +50722,6 @@ var staticRenderFns = [
       _c("span", [_vm._v("add")]),
       _vm._v(" "),
       _c("span", [_c("i", { staticClass: "ion-android-cart" })])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-option" }, [
-      _c("span", { staticClass: "p-more" }, [_vm._v("More")])
     ])
   }
 ]
@@ -50787,7 +50821,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50798,13 +50832,83 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_simple_spinner__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_simple_spinner___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_simple_spinner__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "product-details"
+    name: "product-details",
+    components: {
+        Spinner: __WEBPACK_IMPORTED_MODULE_0_vue_simple_spinner___default.a
+    },
+    data: function data() {
+        return {
+            spinner: true,
+            loadProduct: false,
+            response: {}
+        };
+    },
+
+    methods: {
+        hideProducts: function hideProducts(status) {
+            this.$emit('product', status);
+        }
+    },
+    created: function created() {
+        var _this = this;
+
+        this.hideProducts(true);
+        axios.post(this.$route.path).then(function (response) {
+            _this.response = response.data;
+            _this.spinner = false;
+            _this.loadProduct = true;
+        }).catch(function (response) {
+            _this.spinner = false;
+            console.log(response);
+        });
+    }
 });
 
 /***/ }),
@@ -50815,9 +50919,105 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Hiiiiiiiiiiii")])
+  return _c(
+    "div",
+    [
+      _vm.spinner
+        ? _c("spinner", {
+            attrs: {
+              size: "big",
+              message: "Loading...",
+              "line-fg-color": "#000000"
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.loadProduct
+        ? _c("div", [
+            _c("div", { staticClass: "row" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-5" }, [
+                _c("div", { staticClass: "basic-block" }, [
+                  _c(
+                    "div",
+                    { staticClass: "basic-p" },
+                    [
+                      _vm._l(_vm.response.basic, function(base, key) {
+                        return _c("p", [
+                          _vm._v(_vm._s(key) + "-" + _vm._s(base))
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _vm._m(1)
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-7 medium-block" }, [
+                _c("div", { staticClass: "medium-block-btn" }, [
+                  _vm._v("More")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "med-option" },
+                  _vm._l(_vm.response.more, function(group, key) {
+                    return _c("div", { staticClass: "med-group" }, [
+                      _c("div", { staticClass: "gr" }, [_vm._v(_vm._s(key))]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "med-gop" }, [
+                        _c(
+                          "table",
+                          { staticClass: "med-table" },
+                          _vm._l(group, function(option, key) {
+                            return _c("tr", [
+                              _c("td", { staticClass: "mtw1" }, [
+                                _vm._v(_vm._s(key))
+                              ]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "mtw2" }, [
+                                _vm._v(_vm._s(option))
+                              ])
+                            ])
+                          })
+                        )
+                      ])
+                    ])
+                  })
+                )
+              ])
+            ])
+          ])
+        : _vm._e()
+    ],
+    1
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-7" }, [
+      _c("div", { staticClass: "p-slide" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "add-cart-btn" }, [
+      _c("span", [_vm._v("Add to")]),
+      _vm._v(" "),
+      _c("span", [_c("i", { staticClass: "ion-android-cart" })])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

@@ -39,9 +39,13 @@ class ProductController extends Controller
 
 
     public function firstProduct () {
-        $option = 'options_' . $this->language;
-        $productData = $this->table->select("$option as option", 'photos')->where('id', $this->product_id)->first();
-        return response()->json($productData);
+        $optionsAll = 'options_all_' . $this->language;
+        $optionsBasic = 'options_basic_' . $this->language;
+        $productData = $this->table->select("$optionsBasic as optionsBasic", "$optionsAll as optionsAll", 'photos')->where('id', $this->product_id)->first();
+        $optionsBasic = json_decode($productData->optionsBasic);
+        $optionsAll = json_decode($productData->optionsAll);
+        $photos = json_decode($productData->photos);
+        return response()->json(['basic' => $optionsBasic, 'more' => $optionsAll, 'photos' => $photos]);
     }
 
 

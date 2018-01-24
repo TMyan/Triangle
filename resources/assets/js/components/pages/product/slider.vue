@@ -56,7 +56,11 @@
             last () {
                if (this.page !== this.pageCount) {
                    let mul = Math.floor(this.pageCount/5);
-                   this.pageData(this.pageCount, mul * 5);
+                   if (this.pageCount > 5) {
+                       this.pageData(this.pageCount, mul * 5);
+                   }else {
+                       this.pageData(this.pageCount, 0);
+                   }
                }
             },
             pageData (page, skip) {
