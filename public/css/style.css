@@ -241,7 +241,183 @@ html {
 
 /* End Header */
 
+/* Auth */
 
+.close-auth {
+    position: relative;
+}
+
+
+.close-auth i {
+    position: absolute;
+    right: .5rem;
+    font-size: 1.1rem;
+    color: #3c2628;
+}
+
+.cal {
+    top: -2.5rem;
+}
+
+.car {
+    top: -1.5rem;
+}
+
+.close-auth i:hover {
+    color: #a70917
+}
+
+/* Login */
+
+.login-a {
+    position: relative;
+}
+
+.login-b {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+.login-c {
+    width: 25rem;
+    height: 13rem;
+    margin: auto;
+    background-color: #6b6a6a;
+    border-radius: 5px;
+    padding-top: 2.5rem;
+}
+
+
+.lem {
+    width: 16rem;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.lem input {
+    margin-left: 2rem;
+    border-radius: 3px;
+    border: 1px solid;
+    border-color: #a9a5a5;
+    height: 2rem;
+}
+
+.lpas {
+    width: 16rem;
+    margin: auto;
+    margin-bottom: .5rem;
+}
+
+.lpas input {
+    margin-left: .2rem;
+    border-radius: 3px;
+    border: 1px solid;
+    border-color: #a9a5a5;
+    height: 2rem;
+}
+
+.lrem {
+    width: 16rem;
+    margin: auto;
+}
+
+.lbut {
+    text-align: center;
+    margin-top: .5rem;
+}
+
+.lbut button {
+    width: 5rem;
+    height: 2rem;
+    border-radius: 2px;
+    border: 1px;
+}
+
+.lbut button:hover {
+    background-color: #81d081;
+}
+
+.reglink {
+    top: .5rem;
+    position: absolute;
+    padding-left: 0.5rem;
+    cursor: pointer;
+    color: #d9deda;
+}
+
+.reglink:hover {
+    color: #81d081;
+}
+
+/* End Login */
+
+
+
+/* Registration */
+
+
+.register-a {
+    position: relative;
+}
+
+.register-b {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+.register-c {
+    width: 25rem;
+    height: 15rem;
+    margin: auto;
+    background-color: #6b6a6a;
+    border-radius: 5px;
+    padding-top: 1.5rem;
+}
+
+.regInput {
+    width: max-content;
+    margin:auto;
+}
+
+.regInput div {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+.regInput input {
+    border: 1px solid;
+    border-radius: 3px;
+    border-color: gray;
+    height: 2rem;
+}
+
+.regt {
+    width: 8rem;
+}
+
+.rbut {
+    margin-top: .5rem;
+    text-align: center;
+}
+
+.rbut button {
+    border-radius: 2px;
+    border: 1px solid;
+    border-color: #cecece;
+    width: 7rem;
+    height: 2rem;
+}
+
+.rbut button:hover {
+    background-color: #81d081;
+}
+
+/* End Registration */
+
+
+/* End Auth*/
 
 
 /* Home */

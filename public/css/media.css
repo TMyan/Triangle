@@ -124,4 +124,39 @@
     .lang-block.small-lang {
         right: .5rem;
     }
+
+    .login-a .login-c {
+        width: 17rem;
+        height: 12rem;
+        padding-top: 2rem;
+    }
+
+    .login-a .lem, .login-a .lpas, .login-a .lrem {
+        width: 14rem;
+    }
+
+    .login-a .lem input {
+        width: 9rem;
+    }
+
+    .login-a .lpas input {
+        width: 9rem;
+    }
+
+    .login-a .cal {
+        top: -2rem;
+    }
+
+    .register-a .regInput div {
+        display: block;
+    }
+
+    .register-a .register-c {
+        width: 15rem;
+        height: 23rem;
+    }
+
+    .register-a .rbut {
+        margin-top: 1rem;
+    }
 }

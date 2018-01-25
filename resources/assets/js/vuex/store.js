@@ -10,7 +10,9 @@ export default new Vuex.Store ({
             footer: false
         },
         language: 'en',
-        showMinNav: false
+        showMinNav: false,
+        loginBlock: false,
+        registrationBlock: false
     },
     mutations: {
         language (state, lang) {
@@ -28,6 +30,20 @@ export default new Vuex.Store ({
            } else {
                state.showMinNav = true;
            }
+        },
+        login (state) {
+            if (state.loginBlock) {
+                state.loginBlock = false;
+            } else {
+                state.loginBlock = true;
+            }
+        },
+        registration (state) {
+            if (state.registrationBlock) {
+                state.registrationBlock = false;
+            } else {
+                state.registrationBlock = true;
+            }
         }
     }
 })

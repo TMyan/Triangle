@@ -1,6 +1,6 @@
 <template>
     <div class="header"  id="header">
-        <div class="login big-l">Login</div>
+        <div class="login big-l" @click="loginBlock">Login</div>
         <div class="lang-block big-lang">{{lang}}
             <div class="lang"><a :href="'/en' + path">En</a></div>
             <div class="lang"><a :href="'/ru' + path">Ru</a></div>
@@ -15,7 +15,7 @@
                         <div class="lang"><a :href="'/ru' + path">Ru</a></div>
                         <div class="lang"><a :href="'/am' + path">Am</a></div>
                     </div>
-                    <div class="login small-l">Login</div>
+                    <div class="login small-l" @click="loginBlock">Login</div>
                     <span class="my-cart-btn"><i class="ion-android-cart"></i></span>
                     <my-navbar :class="{show: minNav}"></my-navbar>
                     <div @click="vis" class="min-nav">
@@ -41,6 +41,9 @@
         methods: {
           vis () {
              this.$store.commit('visMinNav');
+          },
+          loginBlock () {
+              this.$store.commit('login');
           }
         },
         components: {

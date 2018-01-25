@@ -9,11 +9,11 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item login-small-2" @click="hideMinNav">
-                <a class="nav-link" href="#">Login</a>
+            <li class="nav-item login-small-2" @click="loginBlock">
+                <a class="nav-link lco">Login</a>
             </li>
             <li class="nav-item small-my-cart" @click="hideMinNav">
-                <a class="nav-link" href="#">My cart <i class="ion-android-cart"></i></a>
+                <a class="nav-link lco">My cart <i class="ion-android-cart"></i></a>
             </li>
             <div class="form-inline my-2 my-lg-0">
                 <input class="search" type="search" placeholder="Search" >
@@ -51,6 +51,10 @@
                 if (this.$store.state.showMinNav) {
                     this.$store.commit('visMinNav');
                 }
+            },
+            loginBlock () {
+                this.hideMinNav();
+                this.$store.commit('login');
             }
         },
         created () {
@@ -71,5 +75,9 @@
 <style scoped>
   .hide {
       display: none !important;
+  }
+
+  .lco {
+      color: #86888a !important;
   }
 </style>
