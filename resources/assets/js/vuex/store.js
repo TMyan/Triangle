@@ -12,7 +12,8 @@ export default new Vuex.Store ({
         language: 'en',
         showMinNav: false,
         loginBlock: false,
-        registrationBlock: false
+        registrationBlock: false,
+        resetPasswordBlock: false
     },
     mutations: {
         language (state, lang) {
@@ -43,6 +44,13 @@ export default new Vuex.Store ({
                 state.registrationBlock = false;
             } else {
                 state.registrationBlock = true;
+            }
+        },
+        resetPassword (state) {
+            if (state.resetPasswordBlock) {
+                state.resetPasswordBlock = false;
+            } else {
+                state.resetPasswordBlock = true;
             }
         }
     }
