@@ -13,7 +13,8 @@ export default new Vuex.Store ({
         showMinNav: false,
         loginBlock: false,
         registrationBlock: false,
-        resetPasswordBlock: false
+        resetPasswordBlock: false,
+        authenticated: false
     },
     mutations: {
         language (state, lang) {
@@ -26,32 +27,19 @@ export default new Vuex.Store ({
             state.staticData.footer = status;
         },
         visMinNav (state) {
-           if (state.showMinNav) {
-               state.showMinNav = false;
-           } else {
-               state.showMinNav = true;
-           }
+            state.showMinNav = state.showMinNav ? false : true;
         },
-        login (state) {
-            if (state.loginBlock) {
-                state.loginBlock = false;
-            } else {
-                state.loginBlock = true;
-            }
+        loginForm (state) {
+            state.loginBlock = state.loginBlock ? false : true;
         },
-        registration (state) {
-            if (state.registrationBlock) {
-                state.registrationBlock = false;
-            } else {
-                state.registrationBlock = true;
-            }
+        registrationForm (state) {
+            state.registrationBlock = state.registrationBlock ? false : true;
         },
-        resetPassword (state) {
-            if (state.resetPasswordBlock) {
-                state.resetPasswordBlock = false;
-            } else {
-                state.resetPasswordBlock = true;
-            }
+        resetPasswordForm (state) {
+            state.resetPasswordBlock = state.resetPasswordBlock ? false : true;
+        },
+        authentication (state) {
+            state.authenticated = state.authenticated ? false : true;
         }
     }
 })

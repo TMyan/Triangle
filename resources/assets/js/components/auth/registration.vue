@@ -3,7 +3,7 @@
         <div class="register-b">
             <div class="register-c">
                 <div class="close-auth">
-                    <i class="ion-close-round" @click="hideRegistrationBlock"></i>
+                    <i class="ion-close-round" @click="closeRegistrationForm"></i>
                 </div>
                 <div class="auth-title">
                     Registration Form
@@ -76,8 +76,8 @@
           }
         },
         methods: {
-            hideRegistrationBlock () {
-                this.$store.commit('registration');
+            closeRegistrationForm () {
+                this.$store.commit('registrationForm');
             },
             registration () {
                 this.$validator.validateAll().then((result) => {

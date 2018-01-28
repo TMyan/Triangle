@@ -3,7 +3,7 @@
         <div class="login-b">
             <div class="login-c">
                 <div class="close-auth">
-                    <i class="ion-close-round" @click="hideLoginBlock"></i>
+                    <i class="ion-close-round" @click="closeLoginForm"></i>
                 </div>
                 <div class="auth-title">
                     Login Form
@@ -28,10 +28,10 @@
                 </div>
 
                 <div class=llk >
-                    <div @click="showResetPasswordBlock">Forgot Your Password? </div>
+                    <div @click="showResetPasswordForm">Forgot Your Password? </div>
                 </div>
                 <div class=llk >
-                    <div @click="showRegistrationBlock">Are you registered? </div>
+                    <div @click="showRegistrationForm">Are you registered? </div>
                 </div>
                 <div class="lbut">
                     <button type="submit" @click="login">Login</button>
@@ -57,16 +57,16 @@
           }
         },
         methods: {
-            hideLoginBlock () {
-                this.$store.commit('login');
+            closeLoginForm () {
+                this.$store.commit('loginForm');
             },
-            showRegistrationBlock () {
-                this.hideLoginBlock();
-                this.$store.commit('registration');
+            showRegistrationForm () {
+                this.closeLoginForm();
+                this.$store.commit('registrationForm');
             },
-            showResetPasswordBlock () {
-                this.hideLoginBlock();
-                this.$store.commit('resetPassword');
+            showResetPasswordForm () {
+                this.closeLoginForm();
+                this.$store.commit('resetPasswordForm');
             },
             login () {
                 this.$validator.validateAll().then((result) => {
@@ -75,7 +75,7 @@
                                 email: this.email,
                                 password: this.password
                             })
-                            .then(() => {
+                            .then(response => {
 
                             })
                             .catch(error => {

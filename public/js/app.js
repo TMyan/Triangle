@@ -44416,16 +44416,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        hideLoginBlock: function hideLoginBlock() {
-            this.$store.commit('login');
+        closeLoginForm: function closeLoginForm() {
+            this.$store.commit('loginForm');
         },
-        showRegistrationBlock: function showRegistrationBlock() {
-            this.hideLoginBlock();
-            this.$store.commit('registration');
+        showRegistrationForm: function showRegistrationForm() {
+            this.closeLoginForm();
+            this.$store.commit('registrationForm');
         },
-        showResetPasswordBlock: function showResetPasswordBlock() {
-            this.hideLoginBlock();
-            this.$store.commit('resetPassword');
+        showResetPasswordForm: function showResetPasswordForm() {
+            this.closeLoginForm();
+            this.$store.commit('resetPasswordForm');
         },
         login: function login() {
             var _this = this;
@@ -44435,7 +44435,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     axios.post('/auth/login', {
                         email: _this.email,
                         password: _this.password
-                    }).then(function () {}).catch(function (error) {
+                    }).then(function (response) {}).catch(function (error) {
                         console.log(error);
                     });
                 }
@@ -44580,7 +44580,7 @@ var render = function() {
         _c("div", { staticClass: "close-auth" }, [
           _c("i", {
             staticClass: "ion-close-round",
-            on: { click: _vm.hideLoginBlock }
+            on: { click: _vm.closeLoginForm }
           })
         ]),
         _vm._v(" "),
@@ -44711,13 +44711,13 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "llk" }, [
-          _c("div", { on: { click: _vm.showResetPasswordBlock } }, [
+          _c("div", { on: { click: _vm.showResetPasswordForm } }, [
             _vm._v("Forgot Your Password? ")
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "llk" }, [
-          _c("div", { on: { click: _vm.showRegistrationBlock } }, [
+          _c("div", { on: { click: _vm.showRegistrationForm } }, [
             _vm._v("Are you registered? ")
           ])
         ]),
@@ -44934,8 +44934,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        hideRegistrationBlock: function hideRegistrationBlock() {
-            this.$store.commit('registration');
+        closeRegistrationForm: function closeRegistrationForm() {
+            this.$store.commit('registrationForm');
         },
         registration: function registration() {
             var _this = this;
@@ -44970,7 +44970,7 @@ var render = function() {
         _c("div", { staticClass: "close-auth" }, [
           _c("i", {
             staticClass: "ion-close-round",
-            on: { click: _vm.hideRegistrationBlock }
+            on: { click: _vm.closeRegistrationForm }
           })
         ]),
         _vm._v(" "),
@@ -45407,8 +45407,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        hideLoginBlock: function hideLoginBlock() {
-            this.$store.commit('resetPassword');
+        closeResetPasswordForm: function closeResetPasswordForm() {
+            this.$store.commit('resetPasswordForm');
         },
         confirmRegistration: function confirmRegistration() {
             var _this = this;
@@ -45438,7 +45438,7 @@ var render = function() {
         _c("div", { staticClass: "close-auth" }, [
           _c("i", {
             staticClass: "ion-close-round",
-            on: { click: _vm.hideLoginBlock }
+            on: { click: _vm.closeResetPasswordForm }
           })
         ]),
         _vm._v(" "),
@@ -45866,6 +45866,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -45878,9 +45880,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         vis: function vis() {
             this.$store.commit('visMinNav');
         },
-        loginBlock: function loginBlock() {
-            this.$store.commit('login');
-        }
+        showLoginForm: function showLoginForm() {
+            this.$store.commit('loginForm');
+        },
+        logout: function logout() {}
     },
     components: {
         myNavbar: __WEBPACK_IMPORTED_MODULE_0__navbar_myNavbar___default.a
@@ -45895,6 +45898,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         minNav: function minNav() {
             return this.$store.state.showMinNav;
+        },
+        authenticated: function authenticated() {
+            return this.$store.state.authenticated;
         }
     }
 });
@@ -46023,6 +46029,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "my-navbar",
@@ -46056,9 +46063,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.$store.commit('visMinNav');
             }
         },
-        loginBlock: function loginBlock() {
+        showLoginForm: function showLoginForm() {
             this.hideMinNav();
-            this.$store.commit('login');
+            this.$store.commit('loginForm');
+        },
+        logout: function logout() {}
+    },
+    computed: {
+        authenticated: function authenticated() {
+            return this.$store.state.authenticated;
         }
     },
     created: function created() {
@@ -46136,14 +46149,21 @@ var render = function() {
           )
         }),
         _vm._v(" "),
-        _c(
-          "li",
-          {
-            staticClass: "nav-item login-small-2",
-            on: { click: _vm.loginBlock }
-          },
-          [_c("a", { staticClass: "nav-link lco" }, [_vm._v("Login")])]
-        ),
+        _c("li", { staticClass: "nav-item login-small-2" }, [
+          _c(
+            "a",
+            { staticClass: "nav-link lco", on: { click: _vm.showLoginForm } },
+            [_vm._v("Login")]
+          ),
+          _vm._v(" "),
+          _vm.authenticated
+            ? _c(
+                "a",
+                { staticClass: "nav-link lco", on: { click: _vm.logout } },
+                [_vm._v("Logout")]
+              )
+            : _vm._e()
+        ]),
         _vm._v(" "),
         _c(
           "li",
@@ -46200,9 +46220,17 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "header", attrs: { id: "header" } }, [
-    _c("div", { staticClass: "login big-l", on: { click: _vm.loginBlock } }, [
-      _vm._v("Login")
-    ]),
+    _c(
+      "div",
+      { staticClass: "login big-l", on: { click: _vm.showLoginForm } },
+      [_vm._v("Login")]
+    ),
+    _vm._v(" "),
+    _vm.authenticated
+      ? _c("div", { staticClass: "login big-l", on: { click: _vm.logout } }, [
+          _vm._v("Logout")
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "lang-block big-lang" }, [
       _vm._v(_vm._s(_vm.lang) + "\n        "),
@@ -46244,9 +46272,20 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "login small-l", on: { click: _vm.loginBlock } },
+              {
+                staticClass: "login small-l",
+                on: { click: _vm.showLoginForm }
+              },
               [_vm._v("Login")]
             ),
+            _vm._v(" "),
+            _vm.authenticated
+              ? _c(
+                  "div",
+                  { staticClass: "login small-l", on: { click: _vm.logout } },
+                  [_vm._v("Logout")]
+                )
+              : _vm._e(),
             _vm._v(" "),
             _vm._m(0),
             _vm._v(" "),
@@ -52321,7 +52360,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         showMinNav: false,
         loginBlock: false,
         registrationBlock: false,
-        resetPasswordBlock: false
+        resetPasswordBlock: false,
+        authenticated: false
     },
     mutations: {
         language: function language(state, lang) {
@@ -52334,32 +52374,19 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
             state.staticData.footer = status;
         },
         visMinNav: function visMinNav(state) {
-            if (state.showMinNav) {
-                state.showMinNav = false;
-            } else {
-                state.showMinNav = true;
-            }
+            state.showMinNav = state.showMinNav ? false : true;
         },
-        login: function login(state) {
-            if (state.loginBlock) {
-                state.loginBlock = false;
-            } else {
-                state.loginBlock = true;
-            }
+        loginForm: function loginForm(state) {
+            state.loginBlock = state.loginBlock ? false : true;
         },
-        registration: function registration(state) {
-            if (state.registrationBlock) {
-                state.registrationBlock = false;
-            } else {
-                state.registrationBlock = true;
-            }
+        registrationForm: function registrationForm(state) {
+            state.registrationBlock = state.registrationBlock ? false : true;
         },
-        resetPassword: function resetPassword(state) {
-            if (state.resetPasswordBlock) {
-                state.resetPasswordBlock = false;
-            } else {
-                state.resetPasswordBlock = true;
-            }
+        resetPasswordForm: function resetPasswordForm(state) {
+            state.resetPasswordBlock = state.resetPasswordBlock ? false : true;
+        },
+        authentication: function authentication(state) {
+            state.authenticated = state.authenticated ? false : true;
         }
     }
 }));

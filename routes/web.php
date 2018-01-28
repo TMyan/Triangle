@@ -19,3 +19,8 @@ Route::prefix('/{lang}/products')->group(function () {
 
 Route::post('{lang}/navigation', 'NavigationController@index');
 Route::post('{lang}/footer', 'FooterController@index');
+
+
+/* Auth routes */
+
+

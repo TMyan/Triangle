@@ -3,7 +3,7 @@
         <div class="forgot-p-b">
             <div class="forgot-p-c">
                 <div class="close-auth">
-                    <i class="ion-close-round" @click="hideLoginBlock"></i>
+                    <i class="ion-close-round" @click="closeResetPasswordForm"></i>
                 </div>
                 <hr>
                 <div class="fInput">
@@ -42,8 +42,8 @@
           }
         },
         methods: {
-            hideLoginBlock (){
-               this.$store.commit('resetPassword');
+            closeResetPasswordForm (){
+               this.$store.commit('resetPasswordForm');
             },
             confirmRegistration () {
                 this.$validator.validateAll().then((result) => {

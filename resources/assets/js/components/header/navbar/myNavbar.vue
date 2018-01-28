@@ -9,8 +9,9 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item login-small-2" @click="loginBlock">
-                <a class="nav-link lco">Login</a>
+            <li class="nav-item login-small-2">
+                <a class="nav-link lco"  @click="showLoginForm">Login</a>
+                <a v-if="authenticated" class="nav-link lco"  @click="logout">Logout</a>
             </li>
             <li class="nav-item small-my-cart" @click="hideMinNav">
                 <a class="nav-link lco">My cart <i class="ion-android-cart"></i></a>
@@ -52,9 +53,17 @@
                     this.$store.commit('visMinNav');
                 }
             },
-            loginBlock () {
+            showLoginForm () {
                 this.hideMinNav();
-                this.$store.commit('login');
+                this.$store.commit('loginForm');
+            },
+            logout () {
+
+            }
+        },
+        computed: {
+            authenticated () {
+                return this.$store.state.authenticated;
             }
         },
         created () {
